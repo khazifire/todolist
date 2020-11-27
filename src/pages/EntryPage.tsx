@@ -41,14 +41,14 @@ const EntryPage: React.FC = () => {
 
   
   function handleDelete() {
-    firestore.collection('users').doc(userId).collection('entries').doc(id)
+    firestore.collection('users').doc(userId).collection('TracktUserRecords').doc(id)
     .delete() 
       history.goBack(); 
     };
 
 
     useEffect(() => {
-        const entryRef = firestore.collection("users").doc(userId).collection("entries").doc(id);
+        const entryRef = firestore.collection("users").doc(userId).collection("TracktUserRecords").doc(id);
         entryRef.get().then((doc) => {setEntry(toEntry(doc));
         });
       }, [userId, id]);
@@ -73,9 +73,6 @@ const EntryPage: React.FC = () => {
       <h2>{entry?.title}</h2>
       <img src={entry?.pictureUrl} alt={entry?.title} />
         <p>{entry?.description}</p> 
-       
-    
-     
      </IonContent>
      
     </IonPage>

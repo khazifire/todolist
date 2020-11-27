@@ -4,13 +4,14 @@ import 'firebase/firestore';
 import 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDgyDA7IiNAfBim9b-4Fc7molM9w7sviaA",
-  authDomain: "daily-moments-cdd39.firebaseapp.com",
-  databaseURL: "https://daily-moments-cdd39.firebaseio.com",
-  projectId: "daily-moments-cdd39",
-  storageBucket: "daily-moments-cdd39.appspot.com",
-  messagingSenderId: "95524271115",
-  appId: "1:95524271115:web:d511432a3d8f68ce2d830e"
+    apiKey: "AIzaSyDmeg19JS0pqBz4gBII4UGKTWAD3c48jic",
+    authDomain: "trackt-eee2f.firebaseapp.com",
+    databaseURL: "https://trackt-eee2f.firebaseio.com",
+    projectId: "trackt-eee2f",
+    storageBucket: "trackt-eee2f.appspot.com",
+    messagingSenderId: "1003112233709",
+    appId: "1:1003112233709:web:3ff4921a00f8d7ba816ae4",
+    measurementId: "G-075ZBJ5P5D"
 
     
   };

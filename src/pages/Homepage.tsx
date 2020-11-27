@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
   const [entry, setEntry] = useState<Entry>();
 
   useEffect(() => {
-    const entriesRef = firestore.collection('users').doc(userId).collection('entries');
+    const entriesRef = firestore.collection('users').doc(userId).collection('TracktUserRecords');
      console.log('You are in HomePage',  entriesRef);
      
     return entriesRef.orderBy('date','desc').limit(7).onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  

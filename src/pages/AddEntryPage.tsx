@@ -39,12 +39,6 @@ const AddEntryPage: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>();
 
 
-
-
-
-
-
-
   useEffect(() => () => {
     if(pictureUrl.startsWith('blob:')){
       URL.revokeObjectURL(pictureUrl);
@@ -63,7 +57,7 @@ const AddEntryPage: React.FC = () => {
 
    const handlesave = async () => {
     const entriesRef = firestore.collection('users').doc(userId)
-      .collection('entries');
+      .collection('TracktUserRecords');
     const entryData = { date, title, pictureUrl, description};
     if (pictureUrl.startsWith('blob:'))
       entryData.pictureUrl = await savePicture(pictureUrl,userId);
@@ -119,7 +113,5 @@ const AddEntryPage: React.FC = () => {
     </IonPage>
   );
 };
-
-
 
 export default AddEntryPage;
