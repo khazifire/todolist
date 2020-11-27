@@ -24,13 +24,14 @@ import moment from "moment";
 
 const SettingsPage: React.FC = () => {
   const [timeIn, setTimeIn] = useState("");
-  const [timeOut, setTimeOut] = useState("");
   const { userId } = useAuth();
   const [description, setDescription] = useState("");
   const history = useHistory();
   const [showPopover, setShowPopover] = useState(false);
   const [timeworked, settimeworked] = useState<any>("");
-  const [timeOnPause, settimeOnPause] = useState<any>();
+  // const [timeInMinutes, settimeInMinutes] = useState<any>("");
+  // const [timeInHours, settimeInHours] = useState<any>("");
+  
 
   const handleTimeIn = () => {
     const now = moment();
@@ -38,25 +39,30 @@ const SettingsPage: React.FC = () => {
     setTimeIn(now.toISOString());
   };
 
-  const handleTimeOut = () => {
-    const now = moment();
-    console.log("Time Out: ", now);
-    setTimeOut(now.toISOString());
-  };
-
   const handleSaveTime = () => {
+    const now = moment();
+    console.log("Time out: ", now);
+  
+ 
     const time1 = moment(timeIn);
-    const time2 = moment(timeOut);
-    const timeDiff = time2.diff(time1);
-
-    const inseconds = (timeDiff / 1000);
+    const timeDiff = now.diff(time1);
+    const inseconds =(timeDiff / 1000);
     console.log(timeDiff / 1000, "Second");
-    settimeworked(inseconds) 
-    console.log(inseconds, "innnnnnnSecond");
-    settimeOnPause(inseconds+timeOnPause);
-    console.log(timeOnPause, "innnnnnnSecondTOTAL");
-   
+    settimeworked(inseconds);
+
+    
+    
   };
+
+  // const convertime =() =>{
+  //   if (timeworked>10){
+  //     settimeInMinutes(timeworked/15)
+  //     console.log(timeInMinutes, "Second");
+  //   } else if(timeInMinutes>2)
+  //   settimeInHours(timeInMinutes/3)
+  //   console.log(timeInHours, "Second");
+
+  // }
 
   const workedTimePopUp = () => {
     
@@ -89,14 +95,13 @@ const SettingsPage: React.FC = () => {
           </IonCardHeader>
 
           <Timer formatValue={(value) => `${value < 10 ? `0${value}` : value}`} initialTime={0} startImmediately={false}>
-            {({ start, pause, stop, reset }) => (
+            {({ start, stop, reset }) => (
               <>
                 <h1> <Timer.Hours />:<Timer.Minutes />:<Timer.Seconds /></h1>
 
-                <IonCardContent>
-                  <IonButton onClick={() => {start(); handleTimeIn()}}>Start</IonButton>
-                  <IonButton color="danger" onClick={() => {pause(); handleTimeOut(); }} > Stop </IonButton>
-                  <IonButton color="secondary" onClick={() => {reset(); handleSaveTime();setShowPopover(true)}}> SaveTime </IonButton>
+                <IonCardContent   >
+                  <IonButton  onClick={() => {start(); handleTimeIn()}}>Start</IonButton>
+                  <IonButton  color="danger"  onClick={() => {stop(); reset(); handleSaveTime();setShowPopover(true)}}> Stop your activity </IonButton>
                 </IonCardContent>
               </>
             )}
@@ -105,7 +110,8 @@ const SettingsPage: React.FC = () => {
 
         <IonPopover isOpen={showPopover} cssClass="conainer-of-Pop-Ups"onDidDismiss={(e) => workedTimePopUp()}>
           <p className="centerText">Congratulation!</p>
-          <p className="centerText">You spent working </p>
+          
+          <p className="centerText">You spent {timeworked} seconds working </p>
           <IonButton className="IonButtonRadius" expand="block"> View Report </IonButton> 
         </IonPopover>
 
@@ -117,3 +123,4 @@ const SettingsPage: React.FC = () => {
 };
 
 export default SettingsPage;
+
