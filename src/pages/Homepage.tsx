@@ -54,9 +54,6 @@ const HomePage: React.FC = () => {
         <IonList>
           {entries.map((entry) => 
             <IonItem button key={entry.id} routerLink={`/my/entry/${entry.id}`}>
-              <IonThumbnail slot="end">
-            <IonImg src={entry.pictureUrl}/>
-              </IonThumbnail>
               
               <IonLabel>
                 <h1> {formatDate(entry.date)}</h1>
@@ -68,7 +65,7 @@ const HomePage: React.FC = () => {
         </IonList>
      
         <IonFab vertical="bottom" horizontal="end">
-        <IonFabButton routerLink="/my/addentry/add">
+        <IonFabButton routerLink="TimeTracker">
         <IonIcon icon={addIcon} />
         </IonFabButton>
        </IonFab>

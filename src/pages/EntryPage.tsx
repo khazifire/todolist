@@ -14,7 +14,7 @@ import { useRouteMatch } from "react-router";
 import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
 import { useAuth } from "../auth";
-import { trash as deleteIcon} from 'ionicons/icons';
+import { trash as deleteIcon } from 'ionicons/icons';
 import { useHistory } from "react-router-dom";
 
 import moment from 'moment';
@@ -39,42 +39,47 @@ const EntryPage: React.FC = () => {
   const history = useHistory();
 
 
-  
+
   function handleDelete() {
     firestore.collection('users').doc(userId).collection('TracktUserRecords').doc(id)
-    .delete() 
-      history.goBack(); 
-    };
+      .delete()
+    history.goBack();
+  };
 
 
-    useEffect(() => {
-        const entryRef = firestore.collection("users").doc(userId).collection("TracktUserRecords").doc(id);
-        entryRef.get().then((doc) => {setEntry(toEntry(doc));
-        });
-      }, [userId, id]);
+  useEffect(() => {
+    const entryRef = firestore.collection("users").doc(userId).collection("TracktUserRecords").doc(id);
+    entryRef.get().then((doc) => {
+      setEntry(toEntry(doc));
+    });
+  }, [userId, id]);
 
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-       
+
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
           <IonTitle> {formatDate(entry?.date)}</IonTitle>
           <IonButton slot="end" onClick={handleDelete} fill="clear">
-          <IonIcon  icon={deleteIcon} />
+            <IonIcon icon={deleteIcon} />
           </IonButton>
 
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-      <h2>{entry?.title}</h2>
-      <img src={entry?.pictureUrl} alt={entry?.title} />
-        <p>{entry?.description}</p> 
-     </IonContent>
-     
+        <h1>Activity:  </h1>
+        <p>{entry?.title}</p>
+
+        <h3>Time spent:</h3>
+        <p>{entry?.AmountOfTimeWorked}</p>
+        <h2>Description:</h2>
+        <p>{entry?.description}</p>
+      </IonContent>
+
     </IonPage>
   );
 };

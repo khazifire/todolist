@@ -1,0 +1,29 @@
+
+  .h1_timer {
+    font-size:4.5rem;
+    text-align: center;
+ }
+
+ .h1_TracktTimer {
+    font-size:2rem;
+    text-align: center;
+ }
+ .currentTimeLabel {
+    font-size:3rem;
+    text-align: center;
+    padding: 5%;
+ }
+
+ .currentDateLabel {
+    font-size:1.6rem;
+    text-align: center;
+    padding: 5%;
+ }
+
+ .startButton {
+    display: flex;
+    justify-content: center;
+   
+ }
+
+
