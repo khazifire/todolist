@@ -82,10 +82,6 @@ const AddEntryPage: React.FC = () => {
           <IonInput type="email"
             value={title} onIonChange={(event) => setTitle(event.detail.value)} />
         </IonItem>
-
-       
-
-
         <IonItem>
         <IonLabel position="stacked"> Pictures </IonLabel><br/>
           <input type="file" accept="image/*" hidden ref={fileInputRef}
