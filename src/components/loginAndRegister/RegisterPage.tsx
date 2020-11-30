@@ -19,6 +19,7 @@ import { useAuth } from '../../auth';
 import { auth } from '../../firebase';
 
 import { Redirect } from 'react-router';
+import logo from "./logo.png"
 
 
 //import { Link } from 'react-router-dom';
@@ -56,9 +57,9 @@ const RegisterPage: React.FC = () => {
         <IonCardHeader>
           <img
             className="imageSize"
-            src=""
+            src={logo}
           />
-          <IonCardTitle className="centerText">Sign Up</IonCardTitle>
+          <IonCardTitle className="login100-form-title">Sign Up</IonCardTitle>
         </IonCardHeader>
 
           <IonCardContent>
@@ -66,6 +67,7 @@ const RegisterPage: React.FC = () => {
               <IonItem>
                 <IonLabel position="stacked">Email</IonLabel>
                 <IonInput
+                className="input100"
                   type="email"
                   value={email}
                   onIonChange={(event) => setEmail(event.detail.value)}
@@ -76,6 +78,7 @@ const RegisterPage: React.FC = () => {
               <IonItem>
                 <IonLabel position="stacked">Password</IonLabel>
                 <IonInput
+                className="input100"
                   type="password"
                   value={password}
                   onIonChange={(event) => setPassword(event.detail.value)}

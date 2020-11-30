@@ -1,57 +1,46 @@
-.ionContent {
-  --color: light blue;
-  --background-color: #D6DFD4;
+
+
+/* login title and also the input  */
+.login100-form-title {
+  display: block;
+  font-family: Poppins-Bold;
+  font-size: 30px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: center;
+}
+.login100-form-title i {
+  font-size: 60px;
 }
 
+.input100 {
+  font-family: Poppins-Regular;
+  font-size: 15px;
+  color: #555555;
+  line-height: 1.2;
+
+  display: block;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  padding: 0 5px;
+}
+/* for the image */
 .imageSize {
   display: block;
-  margin-top: 5vh;
+  margin-top:-2vh;
   margin-left: auto;
   margin-right: auto;
-  width: 200px;
+  width: 150px;
 }
 
 .ionCardstyle {
-  border-radius: 20px;
-  margin-top: 8vh;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(50%,50%);
+  position: absolute;
   margin-left: 5vw;
-  margin-right: 5vw;
+  margin-right: 1vw;
 }
 
-.centerDiv {
-  display: block;
-  text-align: center;
-  width: 15vw;
-}
 
-.centerText {
-  text-align: center;
-}
-
-.centerText img {
-  display: block;
-  border-radius: 50%;
-  border: 100px solid #12E3D7;
-  background-color: #12E3D7;
-}
-
-.flagIcon {
-  display: block;
-  width: 60px;
-  border-radius: 50%;
-  background-color: #12E3D7;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.grayStraightLine {
-  margin-left: 0vw;
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
-  height: 15vh;
-  margin-bottom: 1vh;
-}
-
-.IonButtonRadius {
-  --border-radius: 30px;
-}

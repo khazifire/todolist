@@ -19,6 +19,7 @@ import { useAuth } from "../../auth";
 import { auth } from "../../firebase";
 import "../loginAndRegister/StylesSignUP.css";
 import { Redirect } from "react-router";
+import logo from "./logo.png"
 
 /* interface Props {
   onLogin: () => void;
@@ -51,31 +52,36 @@ const LoginPage: React.FC = () => {
 
   return (
     <IonPage>
-    <IonContent color="light" fullscreen>
+    <IonContent color="light" fullscreen >
       <IonCard className="ionCardstyle">
         <IonCardHeader>
           <img
             className="imageSize"
-            src=""
+            src={logo}
           />
-          <IonCardTitle className="centerText">Login</IonCardTitle>
+          <IonCardTitle className="login100-form-title">Login</IonCardTitle>
         </IonCardHeader>
 
           <IonCardContent>
             <IonList>
-              <IonItem>
+             
+              <IonItem >
              {/*    <IonLabel position="stacked">Email</IonLabel> */}
+           
                 <IonInput
+                className="input100"
                   type="email"
                   value={email}
                   onIonChange={(event) => setEmail(event.detail.value)}
                   placeholder="Email"
                 />
+            
               </IonItem>
 
               <IonItem>
                {/*  <IonLabel position="stacked">Password</IonLabel> */}
                 <IonInput
+                    className="input100"
                   type="password"
                   value={password}
                   onIonChange={(event) => setPassword(event.detail.value)}
@@ -85,7 +91,7 @@ const LoginPage: React.FC = () => {
             </IonList>
             {status.error && <IonText color="danger">{errorName.Err}</IonText>}
 
-            <IonButton expand="block" onClick={handleLogin}>
+            <IonButton  expand="block" onClick={handleLogin}>
               Login
             </IonButton>
 
