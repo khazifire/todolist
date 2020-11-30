@@ -14,6 +14,7 @@ import LoginPage from './components/loginAndRegister/LoginPage';
 import AppTab from './AppTab';
 import NotFoundPage from './pages/NotFoundPage';
 import RegisterPage from './components/loginAndRegister/RegisterPage';
+import GettingStarted from './components/welcomePages/GettingStarted';
 
 
 
@@ -33,6 +34,9 @@ const App: React.FC = () => {
       <AuthContext.Provider value={auth}>
         <IonReactRouter>
           <Switch>
+          <Route exact path="/welcome">
+              <GettingStarted />
+            </Route>
             <Route exact path="/login">
               <LoginPage />
             </Route>
