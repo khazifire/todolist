@@ -18,13 +18,13 @@ const slideOpts = {
 const SlidesExample: React.FC = () => {
     return(
        
-<IonPage>
-    <IonContent fullscreen class="ion-padding" scroll-y="false">
-      <IonSlides >
+<IonPage >
+    <IonContent  fullscreen class="ion-padding" scroll-y="false" >
+      <IonSlides pager={true} options={slideOpts}>
       
-        <IonSlide>
+        <IonSlide >
         <div className="slide">
-            <img src={logo}/>
+            <img src={logo} />
             <h2><b>Welcome to TRACKT</b> </h2>
             <p>TRACKT keeps tracks of time spent on any given activities and generates reports based on the activiites done. </p>
             </div> 
