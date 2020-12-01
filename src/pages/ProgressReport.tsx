@@ -11,7 +11,6 @@ import {
 
 } from "@ionic/react";
 import React, {  } from "react";
-import LineRechartComponent from "../components/AreaChart";
 
 
 // function ProgressReport() {
@@ -44,7 +43,7 @@ function ProgressReport() {
       </IonHeader>
       <IonContent className="ion-padding">
         <h2>Work Hours Gained</h2>
-        <LineRechartComponent />
+     
       </IonContent>
     </IonPage>
   );
