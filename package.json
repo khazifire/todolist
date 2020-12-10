@@ -11,6 +11,7 @@
     "@capacitor/core": "2.4.2",
     "@ionic/react": "^5.0.7",
     "@ionic/react-router": "^5.0.7",
+    "@mindinventory/react-native-tab-bar-interaction": "github:mindinventory/react-native-tab-bar-interaction",
     "chart.js": "^2.9.4",
     "dayjs": "^1.9.5",
     "firebase": "^8.0.0",

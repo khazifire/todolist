@@ -9,21 +9,37 @@
     text-align: center;
  }
  .currentTimeLabel {
-    font-size:3rem;
-    text-align: center;
-    padding: 5%;
+   font-size:2.5rem;
+   padding: 12%;
  }
 
  .currentDateLabel {
     font-size:1.6rem;
-    text-align: center;
-    padding: 5%;
+    padding: 25%;
+
  }
 
  .startButton {
     display: flex;
-    justify-content: center;
+   
    
  }
 
 
+/*  .clock{
+   width: 100vmax;
+   height: 100px;
+   display: block;
+   justify-content: center;
+   align-items: center;
+ 
+   background-size: cover;
+
+
+   box-shadow: 0 -15px 15px rgba(255,255,255,0.05),
+               inset 0 -15px 15px rgba(255,255,255,0.05),
+               0 15px 15px rgba(0, 0, 0, 0.3),
+               inset 0 15px 15px rgba(0, 0, 0, 0.3);
+} */
+
+/*   background: url("/assets/clock.png"); */
