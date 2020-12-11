@@ -14,8 +14,12 @@ import {
   IonModal,
   IonText,
 } from '@ionic/react';
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { auth } from '../firebase';
+import { firestore } from "../firebase";
+
+import { Entry, toEntry } from "../model";
+import { useAuth } from "../auth";
 
 const toggleDarkModeHandler = () => {
   document.body.classList.toggle("dark");
@@ -24,7 +28,16 @@ const toggleDarkModeHandler = () => {
 const SettingsPage: React.FC = () => {
   
   /* https://undraw.co/search */
+  const { userId } = useAuth();
 
+ 
+  const [entries, setEntries] = useState<Entry[]>([]);
+  const [entry, setEntry] = useState<Entry>();
+  
+  useEffect(() => {
+    const entriesRef = firestore.collection('users').doc(userId).collection('UserInfo');
+    return entriesRef.onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  
+      }, []);
   return (
     <IonPage>
       <IonHeader translucent>
@@ -54,16 +67,18 @@ const SettingsPage: React.FC = () => {
         <IonLabel>Account Information</IonLabel>
 
         <IonCard>
+        {entries.map((entry) => 
           <IonList>
             <IonItem>
+            
               <IonText color="primary" >
-                Change username
-          </IonText>
-            </IonItem>
-
+                Change username: {entry.UserName}
+          </IonText>  
+            </IonItem> 
+           
             <IonItem>
               <IonText color="primary" >
-                Change Email
+                Change Email: {entry.email}
           </IonText>
             </IonItem>
 
@@ -73,7 +88,7 @@ const SettingsPage: React.FC = () => {
           </IonText>
             </IonItem>
 
-          </IonList>
+          </IonList> )}
         </IonCard>
         <IonLabel>Display</IonLabel>
         <IonCard>

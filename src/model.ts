@@ -5,6 +5,8 @@ export interface Entry {
     date: string;
     AmountOfTimeWorked: any;
     pictureUrl: string;
+    UserName: string;
+    email: string;
 
 }
 

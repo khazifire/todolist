@@ -50,7 +50,7 @@ const HomePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonLabel>hi! welcome to mangotime</IonLabel>
+        <IonLabel>Strive to be productive</IonLabel>
         <IonList>
           {entries.map((entry) => 
             <IonItem button key={entry.id} routerLink={`/my/entry/${entry.id}`}>

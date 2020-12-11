@@ -17,10 +17,10 @@ IonCard,
 
 import React, { useState } from 'react';
 import { useAuth } from '../../auth';
-import { auth } from '../../firebase';
+import { auth, firestore } from '../../firebase';
 
 import { Redirect } from 'react-router';
-import logo from "./logo.png"
+
 
 
 //import { Link } from 'react-router-dom';
@@ -35,6 +35,7 @@ const RegisterPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [UserName, setUserName] = useState('');
   const [status, setStatus] = useState({loading: false, error: false});
+  const { userId } = useAuth();
 
   const handleRegister = async () => {
     try {
@@ -45,10 +46,17 @@ const RegisterPage: React.FC = () => {
       setStatus({loading: false, error: true })
       console.log('error: ', error);
     }
+
+    
   };
 
   const { loggedIn } = useAuth();
   if(loggedIn){
+
+   const entriesRef=firestore.collection('users').doc(userId).collection('UserInfo');
+  const entryData = { UserName,email };
+  const entryRef =  entriesRef.add(entryData);
+
     return <Redirect to="/my/entries"/>;
   }
 
@@ -124,46 +132,5 @@ const RegisterPage: React.FC = () => {
     </IonPage>
   );
 };
-
-
-
-
-  /*   <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Register</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-  
-          <IonContent className="ion-padding">
-         <IonItem>
-          <IonLabel position="stacked">Email</IonLabel>
-            <IonInput type="email" 
-              value={email} onIonChange={(event) => setEmail(event.detail.value)}/>
-         </IonItem>
-
-         <IonItem>
-          <IonLabel position="stacked">Password</IonLabel>
-            <IonInput type="password"
-               value={password} onIonChange={(event) => setPassword(event.detail.value)}/>
-         </IonItem>
-
-          {status.error &&
-              <IonText color="danger">Registration Failed</IonText>
-          }
-
-              <IonButton expand="block" onClick={handleRegister}>
-               Create Account
-                </IonButton>
-              <IonButton expand="block" fill="clear" routerLink="/login">
-               Already have an account?
-              </IonButton>
-              <IonLoading isOpen={status.loading}></IonLoading>
-          </IonContent>
-    </IonPage>
-  );
-};
- */
-
 
 export default RegisterPage;
