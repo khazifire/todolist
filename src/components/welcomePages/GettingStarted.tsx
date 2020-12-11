@@ -1,87 +1,116 @@
-import React from 'react';
+import React, { useContext } from "react";
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonImg,
+  IonLabel,
+  IonPage,
+  IonRow,
+  IonSlide,
+  IonSlides,
+  IonText,
+  IonTitle,
+  IonToggle,
+  IonToolbar,
+  IonIcon
+} from "@ionic/react";
 import "./welcome.css"
-import { IonSlides, IonSlide, IonContent, IonCard, IonCardContent, IonTitle, IonPage, IonCardHeader, IonCardTitle, IonButton, IonIcon } from '@ionic/react';
-import logo from "../loginAndRegister/logo.png"
 import { arrowForward } from 'ionicons/icons';
 
+import { useHistory } from "react-router";
+/* import { turnOffModal } from "../model"; */
 
+const GettingStarted: React.FC = () => {
+  const history = useHistory();
 
+  return (
+    <>
+      
+      <IonContent color="light" fullscreen>
+        <IonSlides>
+          <IonSlide>
+            <IonCard className="IonCardFaq">
+           
+              <IonCardHeader>
+                <div className="ion-text-center centerImg">
+                  <img  height="300 px"src="/assets/welcome.svg"  />
+                </div>
+                <br />
+                <IonCardSubtitle className="centerText">
+                  Hello!
+                </IonCardSubtitle>
+                <IonCardTitle className="centerText">Welcome</IonCardTitle>
+              </IonCardHeader>
 
-// Optional parameters to pass to the swiper instance.
-// See http://idangero.us/swiper/api/ for valid options.
-const slideOpts = {
-  initialSlide: 0,
-  speed: 400
+              <IonCardContent>
+                <IonText>
+                  <div className="ion-text-center">
+                    Swipe Left  to continue 
+                    <IonIcon  icon={arrowForward} ></IonIcon>
+                  </div>
+                </IonText>
+              </IonCardContent>
+            </IonCard>
+          </IonSlide>
+          <IonSlide>
+            <IonCard className="IonCardFaq">
+              <IonCardHeader>
+                <div className="ion-text-center centerImg">
+                  <img height="150 px" src="/assets/productive.svg" />
+                </div>
+               
+              </IonCardHeader>
+
+              <IonCardContent>
+                <IonText>
+                  <div className="ion-text-center">
+                  TRACKT is a productivity tool, which helps you keep track of time spent on any given activities. And does not make use of any collected data.
+                  </div>
+                </IonText>
+              </IonCardContent>
+            </IonCard>
+          </IonSlide>
+          
+          <IonSlide>
+            <IonCard className="IonCardFaq">
+              <br />
+              <br />
+              <IonCardHeader>
+                <div className="ion-text-center centerImg">
+                  <img height="120 px" src="/assets/login.svg"  />
+                </div>{" "}
+                <br />
+                {/* <IonCardSubtitle className="centerText">
+                  Contact Us
+                </IonCardSubtitle> */}
+                <IonCardTitle className="centerText">Getting Started</IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent >
+                <br />
+                <IonButton  className="buttonsStyle" routerLink="/login">Login</IonButton>  <br />
+               <IonButton  className="buttonsStyle" routerLink="/register"> Create an Account</IonButton>
+               
+              </IonCardContent>
+            </IonCard>
+          </IonSlide>
+         
+         
+        </IonSlides>
+        {/* <IonButton fill="clear" expand="full" >
+          SKIP
+        </IonButton> */}
+      </IonContent>
+    </>
+  );
 };
 
-
-const SlidesExample: React.FC = () => {
-    return(
-       
-<IonPage >
-    <IonContent  fullscreen class="ion-padding" scroll-y="false" >
-      <IonSlides pager={true} options={slideOpts}>
-      
-        <IonSlide >
-        <div className="slide">
-            <img src={logo} />
-            <h2><b>Welcome to TRACKT</b> </h2>
-            <p>TRACKT keeps tracks of time spent on any given activities and generates reports based on the activiites done. </p>
-            </div> 
-        </IonSlide>
-
-        <IonSlide>
-        <div className="slide">
-          <img src="./slide-2.png"/>
-          <h2><b>Getting started</b> </h2>
-          <p>In order to use TRACKT you need to create an account, so that your record can be saved</p>
-          <IonButton fill="clear">NEXT <IonIcon slot="end" icon={arrowForward} ></IonIcon></IonButton>
-          </div> 
-        </IonSlide>
-
-       
-        <IonSlide>
-        <div className="slide">
-          <img src="./slide-2.png"/>
-          <h2><b>1</b> </h2>
-          <p>After signing up, you will be automatically be redirect to the homepage.</p>
-          <IonButton fill="clear">NEXT<IonIcon slot="end" icon={arrowForward} ></IonIcon></IonButton>
-          </div> 
-        </IonSlide>
-
-        <IonSlide>
-        <div className="slide">
-          <img src="./slide-2.png"/>
-          <h2><b>2</b> </h2>
-          <p>To use the tracker, click on the plus icon, on the bottom right, or the tab "Tracker"</p>
-          <p>Fill up all the empty field while on the tracker page</p>
-          <IonButton fill="clear">NEXT<IonIcon slot="end" icon={arrowForward} ></IonIcon></IonButton>
-          </div> 
-        </IonSlide>
-        
-
-        
-        <IonSlide>
-        <div className="slide">
-          <img src="./slide-2.png"/>
-          <h2><b>3</b> </h2>
-          <p>Press START, to initiate the timer, and STOP to terminate the timer thus saving the timer spent on that activites </p>
-          <IonButton fill="clear">NEXT<IonIcon slot="end" icon={arrowForward} ></IonIcon></IonButton>
-          </div> 
-        </IonSlide>
-
-        
-        <IonSlide>
-        <div className="slide">
-          <img src="./slide-2.png"/>
-          <h2><b>4</b> </h2>
-          <p>The HOME page,diaplays all the record of the activites you kept track of. The PROGRESS page, displays a grpahical summary of the activites you did</p>
-          <IonButton fill="clear" routerLink="/my/home">Lets dive in <IonIcon slot="end" icon={arrowForward} ></IonIcon></IonButton>
-          </div> 
-        </IonSlide>
-      </IonSlides>
-    </IonContent>
-  </IonPage>
-  
-)};
-export default SlidesExample;
+export default GettingStarted;

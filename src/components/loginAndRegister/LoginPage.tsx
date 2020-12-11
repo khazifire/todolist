@@ -2,7 +2,7 @@ import {
   IonContent,
   IonPage,
   IonItem,
-  /* IonLabel, */
+   IonLabel, 
   IonInput,
   IonButton,
   IonText,
@@ -12,6 +12,7 @@ import {
   IonCardHeader,
   IonCardContent,
   IonCardTitle,
+  IonCardSubtitle,
 } from "@ionic/react";
 
 import React, { useState } from "react";
@@ -55,57 +56,49 @@ const LoginPage: React.FC = () => {
     <IonContent color="light" fullscreen >
       <IonCard className="ionCardstyle">
         <IonCardHeader>
-          <img
-            className="imageSize"
-            src={logo}
-          />
-          <IonCardTitle className="login100-form-title">Login</IonCardTitle>
-        </IonCardHeader>
+                  <img   className="imageSize"src="/assets/login_illustration.svg"  />
+                <IonCardSubtitle className="centerText">
+                  LOGIN
+                </IonCardSubtitle>
+                <IonCardTitle className="centerText">Welcome back</IonCardTitle>
+              </IonCardHeader>
+        
 
           <IonCardContent>
-            <IonList>
+             <IonList> 
              
               <IonItem >
-             {/*    <IonLabel position="stacked">Email</IonLabel> */}
-           
+              <IonLabel position="stacked">Email</IonLabel> 
                 <IonInput
                 className="input100"
                   type="email"
                   value={email}
                   onIonChange={(event) => setEmail(event.detail.value)}
-                  placeholder="Email"
+                  placeholder="dan@gmail.com"
                 />
-            
               </IonItem>
 
               <IonItem>
-               {/*  <IonLabel position="stacked">Password</IonLabel> */}
+                <IonLabel position="stacked">Password</IonLabel> 
                 <IonInput
-                    className="input100"
+                  className="input100"
                   type="password"
                   value={password}
                   onIonChange={(event) => setPassword(event.detail.value)}
-                  placeholder="Password"
+                  placeholder="**********"
                 />
               </IonItem>
-            </IonList>
+           </IonList> 
             {status.error && <IonText color="danger">{errorName.Err}</IonText>}
 
-            <IonButton  expand="block" onClick={handleLogin}>
-              Login
-            </IonButton>
+            <IonButton  expand="block" onClick={handleLogin}>Login </IonButton>
 
-            <IonButton
-              
-              expand="block"
-              fill="clear"
-              routerLink="/register"
-            >
-              Don't have an account?
-            </IonButton>
+            <IonButton expand="block" fill="clear" routerLink="/register"> Don't have an account?</IonButton>
+           
 
             {/* <IonLoading isOpen={status.loading}></IonLoading> */}
           </IonCardContent>
+          
         </IonCard>
       </IonContent>
     </IonPage>

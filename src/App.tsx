@@ -46,8 +46,10 @@ const App: React.FC = () => {
             <Route path="/my">
               <AppTab />
             </Route>
-
-            <Redirect exact path="/" to="/my/entries" />
+        <Route exact path="/" 
+        render={() =><Redirect to="/welcome" />}
+        />
+            
 
             <Route>
               <NotFoundPage />

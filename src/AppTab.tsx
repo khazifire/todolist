@@ -67,10 +67,10 @@ import ProgressReport from './pages/ProgressReport';
             <IonLabel>Home</IonLabel>
           </IonTabButton>
   
-       {/*    <IonTabButton tab="tab2" href="/my/entries">
+          <IonTabButton tab="tab2" href="/my/setting">
             <IonIcon icon={ellipse} />
-            <IonLabel>Entry</IonLabel>
-          </IonTabButton> */}
+            <IonLabel>Settings</IonLabel>
+          </IonTabButton> 
   
           <IonTabButton tab="tab3" href="/my/TimeTracker">
             <IonIcon icon={settingsIcon} />

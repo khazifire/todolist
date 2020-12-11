@@ -12,6 +12,7 @@ IonCard,
   IonCardHeader,
   IonCardContent,
   IonCardTitle,
+  IonCardSubtitle,
 } from '@ionic/react';
 
 import React, { useState } from 'react';
@@ -32,6 +33,7 @@ interface Props {
 const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [UserName, setUserName] = useState('');
   const [status, setStatus] = useState({loading: false, error: false});
 
   const handleRegister = async () => {
@@ -54,16 +56,28 @@ const RegisterPage: React.FC = () => {
 <IonPage>
     <IonContent color="light" fullscreen>
       <IonCard className="ionCardstyle">
-        <IonCardHeader>
-          <img
-            className="imageSize"
-            src={logo}
-          />
-          <IonCardTitle className="login100-form-title">Sign Up</IonCardTitle>
-        </IonCardHeader>
+      <IonCardHeader>
+                  <img  className="imageSize2"src="/assets/signUp_illustration.svg"  />
+                <IonCardSubtitle className="centerText">
+                  Sign Up
+                </IonCardSubtitle>
+                <IonCardTitle className="centerText">Welcome!</IonCardTitle>
+              </IonCardHeader>
 
           <IonCardContent>
             <IonList>
+
+            <IonItem>
+                <IonLabel position="stacked">Username</IonLabel>
+                <IonInput
+                className="input100"
+                  type="email"
+                  value={UserName}
+                  onIonChange={(event) => setUserName(event.detail.value)}
+                  placeholder="@username"
+                />
+              </IonItem>
+
               <IonItem>
                 <IonLabel position="stacked">Email</IonLabel>
                 <IonInput
@@ -71,7 +85,7 @@ const RegisterPage: React.FC = () => {
                   type="email"
                   value={email}
                   onIonChange={(event) => setEmail(event.detail.value)}
-                  placeholder="Email"
+                  placeholder="johndoe@gmail.com"
                 />
               </IonItem>
 
@@ -82,7 +96,7 @@ const RegisterPage: React.FC = () => {
                   type="password"
                   value={password}
                   onIonChange={(event) => setPassword(event.detail.value)}
-                  placeholder="Password"
+                  placeholder="**********"
                 />
               </IonItem>
             </IonList>

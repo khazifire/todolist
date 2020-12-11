@@ -1,38 +1,76 @@
+.ionContent {
+  --color: light blue;
+}
 
-.ion-slides {
-    height: 100%;
-    padding: 0;
-   
-  }
+.imageSize {
+  display: block;
+  margin-top: 5vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+}
 
-  .swiper-slide {
-    display:block;
-  }
+.ionCardstyle {
+  border-radius: 20px;
+  margin-top: 5vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
 
-  .swiper-slide h2 {
-    margin-top: 2.8rem;
-  }
+.centerDiv {
+  display: block;
+  text-align: center;
+  width: 15vw;
+}
 
-  .swiper-slide img {
-    max-height: 50%;
-    max-width: 80%;
-    margin: 60px 0 40px;
-    pointer-events: none;
-  }
+.centerText {
+  text-align: center;
+}
 
-  b {
-    font-weight: 500;
-  }
+.centerText img {
+  display: block;
+  border-radius: 50%;
+  border: 100px solid #12e3d7;
+  background-color: #12e3d7;
+}
 
-  p {
-    padding: 0 40px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--ion-color-step-600, #60646b);
-  }
+.flagIcon {
+  display: block;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #12e3d7;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  p b {
-    color: var(--ion-text-color, #000000);
-  }
+.grayStraightLine {
+  margin-left: 0vw;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  height: 15vh;
+  margin-bottom: 1vh;
+}
 
- 
+.IonButtonRadius {
+  --border-radius: 30px;
+}
+
+.searchBarCustom {
+  --border-radius: 1em;
+}
+
+.centerImg {
+  margin-top: 10vh;
+}
+
+.IonCardFaq {
+  border-radius: 20px;
+  margin-top: 5vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  padding-bottom: 5vh;
+}
+
+.buttonsStyle {
+  width: 200px
+}
