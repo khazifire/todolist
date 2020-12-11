@@ -103,8 +103,9 @@ const SettingsPage: React.FC = () => {
         </IonCard>
 
         <IonButton
-          color="medium"
+         /*  color="medium" */
           expand="block"
+         
           onClick={() => auth.signOut()}
 
         >

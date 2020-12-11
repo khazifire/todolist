@@ -42,7 +42,9 @@ function ProgressReport() {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <h2>Work Hours Gained</h2>
+       {/*  <h2>Work Hours Gained</h2> */}
+
+        <h1>under construction</h1>
      
       </IonContent>
     </IonPage>
