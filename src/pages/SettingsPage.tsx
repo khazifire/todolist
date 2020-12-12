@@ -13,6 +13,8 @@ import {
   IonList,
   IonModal,
   IonText,
+  IonAvatar,
+  IonPopover,
 } from '@ionic/react';
 import React, { useState ,useEffect} from 'react';
 import { auth } from '../firebase';
@@ -21,23 +23,50 @@ import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
 import { useAuth } from "../auth";
 
+
+
+
+
 const toggleDarkModeHandler = () => {
   document.body.classList.toggle("dark");
 };
 
 const SettingsPage: React.FC = () => {
-  
-  /* https://undraw.co/search */
   const { userId } = useAuth();
-
- 
   const [entries, setEntries] = useState<Entry[]>([]);
-  const [entry, setEntry] = useState<Entry>();
-  
+
+  const [PopoverUsername, setPopoverUsername] = useState(false);
+  const [PopoverPassword, setPopoverPassword] = useState(false);
+  const [PopoverEmail, setPopoverEmail] = useState(false);
+  const [PopoverChangePic, setPopoverChangePic] = useState(false);
+
   useEffect(() => {
     const entriesRef = firestore.collection('users').doc(userId).collection('UserInfo');
     return entriesRef.onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  
       }, []);
+
+      
+const updateUsername = () => {
+  setPopoverUsername(true);
+
+ 
+};
+
+const updatePassword = () => {
+  console.log("hi bitc");
+  setPopoverPassword(true);
+};
+
+const updateEmail= () => {
+  console.log("hi bitc");
+  setPopoverEmail(true);
+};
+
+const changeProfilePic= () => {
+  console.log("hi bitc");
+  setPopoverChangePic(true);
+};
+
   return (
     <IonPage>
       <IonHeader translucent>
@@ -50,8 +79,17 @@ const SettingsPage: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-text-center" fullscreen>
         <IonCard>
+        <IonItem>
+          <IonAvatar slot="start">
+            <img src="../../assets/placeholder.png" />
+            </IonAvatar>
+        <IonLabel>
+          <h3>Dan Kazimoto</h3>
+          <p>Dec 12, 2020</p>
+        </IonLabel>
+    </IonItem>
 
-          <img
+          {/* <img
             height="150 px"
             src={"/assets/settings.svg"}
             alt="setting image"
@@ -61,7 +99,7 @@ const SettingsPage: React.FC = () => {
             <IonText color="primary" >
               Edit Picture
           </IonText>
-          </IonItem>
+          </IonItem> */}
         </IonCard>
 
         <IonLabel>Account Information</IonLabel>
@@ -71,20 +109,20 @@ const SettingsPage: React.FC = () => {
           <IonList>
             <IonItem>
             
-              <IonText color="primary" >
+              <IonText color="primary" onClick={updateUsername} >
                 Change username: {entry.UserName}
           </IonText>  
             </IonItem> 
            
             <IonItem>
-              <IonText color="primary" >
+              <IonText color="primary" onClick={updateEmail}>
                 Change Email: {entry.email}
           </IonText>
             </IonItem>
 
             <IonItem>
-              <IonText color="primary" >
-                Change Password
+              <IonText color="primary" onClick={updatePassword}>
+                Change Password: **********
           </IonText>
             </IonItem>
 
@@ -127,7 +165,29 @@ const SettingsPage: React.FC = () => {
     </IonModal> */}
 
       </IonContent>
+      <IonPopover isOpen={PopoverUsername} cssClass="conainer-of-Pop-Ups" onDidDismiss={(e) => setPopoverUsername(false)}>
+          <p className="centerText">updating username!</p>
+        
+          <IonButton className="IonButtonRadius" expand="block" onClick={() =>setPopoverUsername(false)}> Cancel  </IonButton>
+        </IonPopover>
 
+        <IonPopover isOpen={PopoverPassword} cssClass="conainer-of-Pop-Ups" onDidDismiss={(e) => setPopoverPassword(false)}>
+          <p className="centerText">pdating password!</p>
+        
+          <IonButton className="IonButtonRadius" expand="block" onClick={() =>setPopoverPassword(false)}> Cancel </IonButton>
+        </IonPopover>
+
+        <IonPopover isOpen={PopoverEmail} cssClass="conainer-of-Pop-Ups" onDidDismiss={(e) => setPopoverEmail(false)}>
+          <p className="centerText">updating email!</p>
+        
+          <IonButton className="IonButtonRadius" expand="block" onClick={() =>setPopoverEmail(false)}> Cancel </IonButton>
+        </IonPopover>
+
+        <IonPopover isOpen={PopoverChangePic} cssClass="conainer-of-Pop-Ups" onDidDismiss={(e) => setPopoverChangePic(false)}>
+          <p className="centerText">chnaging profile pic!</p>
+          
+          <IonButton className="IonButtonRadius" expand="block" onClick={() =>setPopoverChangePic(false)}> Cancel </IonButton>
+        </IonPopover>
     </IonPage>
   );
 };
