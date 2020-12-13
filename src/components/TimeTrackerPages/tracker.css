@@ -25,6 +25,11 @@
    
  }
 
+ .conainer-of-Pop-Ups{
+    --backdrop-opacity: 10%;
+ }
+
+
 
 /*  .clock{
    width: 100vmax;

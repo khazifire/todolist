@@ -33,6 +33,7 @@ const SettingsPage: React.FC = () => {
   const history = useHistory();
   const [showPopover, setShowPopover] = useState(false);
   const [AmountOfTimeWorked, settimeworked] = useState<any>("");
+  const [PopoverTimer, setPopoverTimer] = useState(false);
   
   const handleTimeIn = () => {
     const now = moment();
@@ -118,13 +119,28 @@ const SettingsPage: React.FC = () => {
           <Timer formatValue={(value) => `${value < 10 ? `0${value}` : value}`} initialTime={0} startImmediately={false}>
             {({ start, stop, reset }) => (
               <>
-              <h2 className='h1_TracktTimer'>TRACKT TIMER</h2>
-                <h1 className="h1_timer" > <Timer.Hours />:<Timer.Minutes />:<Timer.Seconds /></h1>
+            {/*   <h2 className='h1_TracktTimer'>TRACKT TIMER</h2>
+                <h1 className="h1_timer" > <Timer.Hours />:<Timer.Minutes />:<Timer.Seconds /></h1> */}
 
-                <IonCardContent   >
-                  <IonButton className="startButton" onClick={() => { start(); handleTimeIn() }}>Start</IonButton>
-                  <IonButton className="startButton" color="danger" onClick={() => { stop(); reset(); handleSaveTime(); setShowPopover(true); }}> Stop your activity </IonButton>
-                </IonCardContent>
+                
+                  <IonButton className="startButton" onClick={() => { start(); handleTimeIn();setPopoverTimer(true); }}>Start</IonButton>
+               
+
+          <IonPopover isOpen={PopoverTimer} cssClass="fullscreen" backdropDismiss={false}> 
+         
+          <p className="centerText">TImer hehehe</p>
+
+          <h1  className="centerText"> <Timer.Hours />:<Timer.Minutes />:<Timer.Seconds /></h1>
+          <br>
+          </br>
+          <br>
+          </br>
+
+          <IonButton className="startButton" color="danger" onClick={() => { stop(); reset(); handleSaveTime(); setPopoverTimer(false);setShowPopover(true); }}> Stop and Save </IonButton>
+
+          <IonButton className="IonButtonRadius" expand="block" onClick={() =>{stop(); reset();setPopoverTimer(false)}}> Cancel and Quit</IonButton>
+         
+        </IonPopover>
               </>
             )}
           </Timer>
