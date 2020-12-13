@@ -14,6 +14,7 @@ import {
   IonPopover,
   IonInput,
   IonItem,
+  IonAlert
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import Timer from "react-compound-timer";
@@ -34,11 +35,16 @@ const SettingsPage: React.FC = () => {
   const [showPopover, setShowPopover] = useState(false);
   const [AmountOfTimeWorked, settimeworked] = useState<any>("");
   const [PopoverTimer, setPopoverTimer] = useState(false);
+  const [showAlert, setshowAlert]=useState(false);
   
   const handleTimeIn = () => {
+  
     const now = moment();
     console.log("Time In: ", now);
     setTimeIn(now.toISOString());
+    setPopoverTimer(true);
+    
+   
   };
 
   const handleSaveTime = () => {
@@ -93,9 +99,7 @@ const SettingsPage: React.FC = () => {
           <IonLabel >day here</IonLabel>
           {/* <IonLabel className='currentTimeLabel'> {currentdate.toLocaleTimeString()}</IonLabel>  */}
           </IonCardHeader>
-          
-         
-      
+        
           </IonCard>
         <IonCard>
         <IonItem>
@@ -109,6 +113,15 @@ const SettingsPage: React.FC = () => {
           <IonTextarea placeholder="Helping IT students in lab"
             value={description} onIonChange={(event) => setDescription(event.detail.value)} />
         </IonItem>
+        <IonAlert
+          isOpen={showAlert}
+          onDidDismiss={() => setshowAlert(false)}
+          cssClass='my-custom-class'
+          header={'Empy fields Alert'}
+         /*  subHeader={'Please fill up, all the inputs'} */
+          message={'"What are you doing", cannot be left empty'}
+          buttons={['OK']}
+        />
 
       {/* <IonItem>
           <IonLabel position="stacked">Date</IonLabel>
@@ -123,7 +136,14 @@ const SettingsPage: React.FC = () => {
                 <h1 className="h1_timer" > <Timer.Hours />:<Timer.Minutes />:<Timer.Seconds /></h1> */}
 
                 
-                  <IonButton className="startButton" onClick={() => { start(); handleTimeIn();setPopoverTimer(true); }}>Start</IonButton>
+                  <IonButton className="startButton" onClick={() => { 
+                    if  (title!==""){
+                    start(); 
+                    handleTimeIn(); 
+                     }
+                     else {
+                      setshowAlert(true);
+                     }}}>Start</IonButton>
                
 
           <IonPopover isOpen={PopoverTimer} cssClass="fullscreen" backdropDismiss={false}> 
@@ -136,7 +156,7 @@ const SettingsPage: React.FC = () => {
           <br>
           </br>
 
-          <IonButton className="startButton" color="danger" onClick={() => { stop(); reset(); handleSaveTime(); setPopoverTimer(false);setShowPopover(true); }}> Stop and Save </IonButton>
+          <IonButton className="startButton" color="danger" onClick={() => { stop(); reset(); handleSaveTime(); setPopoverTimer(false);setShowPopover(true);}}> Stop and Save </IonButton>
 
           <IonButton className="IonButtonRadius" expand="block" onClick={() =>{stop(); reset();setPopoverTimer(false)}}> Cancel and Quit</IonButton>
          
@@ -146,10 +166,11 @@ const SettingsPage: React.FC = () => {
           </Timer>
         </IonCard>
       
-        <IonPopover isOpen={showPopover} cssClass="conainer-of-Pop-Ups" onDidDismiss={(e) => workedTimePopUp()}>
-          <p className="centerText">Congratulation!</p>
-          <p className="centerText">You spent {AmountOfTimeWorked} seconds working </p>
-          <IonButton className="IonButtonRadius" expand="block"> View Report </IonButton>
+        <IonPopover isOpen={showPopover} cssClass="conainer-of-Pop-Ups"  backdropDismiss={false}>
+          <h1 className="centerText">Congratulation!</h1>
+          <h2 className="centerText">You spent {AmountOfTimeWorked} seconds working </h2>
+ 
+           <IonButton className="IonButtonRadius" expand="block" onClick={() =>workedTimePopUp()}>  Continue </IonButton> 
         </IonPopover>
 
       </IonContent>
