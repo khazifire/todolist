@@ -164,7 +164,7 @@ const SettingsPage: React.FC = () => {
           </IonHeader> 
           <IonContent className="ion-padding" >
           <img   className="imageSize"src="/assets/working.svg"  />
-          <h1  className="centerText"> <Timer.Hours />:<Timer.Minutes />:<Timer.Seconds /></h1>
+          <h1  className="centerText2"> <Timer.Hours />:<Timer.Minutes />:<Timer.Seconds /></h1>
         
             <IonRow>
               <IonCol  >
@@ -172,7 +172,7 @@ const SettingsPage: React.FC = () => {
          </IonCol>
 
          <IonCol >
-         <IonButton  color="danger" onClick={() =>{stop(); reset();setPopoverTimer(false);}}> Cancel and Quit</IonButton>
+         <IonButton  color="danger" onClick={() =>{stop(); reset();setPopoverTimer(false);setshowClosingAlert(true)}}> Cancel and Quit</IonButton>
          
          </IonCol>
          </IonRow>

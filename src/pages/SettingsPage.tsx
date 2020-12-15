@@ -36,11 +36,12 @@ import firebase from 'firebase';
 const toggleDarkModeHandler = () => {
   document.body.classList.toggle("dark");
 };
-const [showClosingAlert, setshowClosingAlert] =useState(false);
+
 
 const SettingsPage: React.FC = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const { userId } = useAuth();
+  const [showClosingAlert, setshowClosingAlert] =useState(false);
 
 
 
@@ -51,6 +52,19 @@ useEffect(() => {
   return entriesRef.onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  
     }, []);
  
+
+    const executeOnce = (change, context, task) => {
+    const eventRef = firestore.collection('events').doc(context.eventId);
+
+    return firestore.runTransaction(t =>
+        t
+         .get(eventRef)
+         .then(docSnap => (docSnap.exists ? null : task(t)))
+         .then(() => t.set(eventRef, { processed: true }))
+    );
+};
+
+
 
 
 

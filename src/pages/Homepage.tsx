@@ -29,6 +29,7 @@ const HomePage: React.FC = () => {
  
   const [entries, setEntries] = useState<Entry[]>([]);
   const [entries2, setEntries2] = useState<Entry[]>([]);
+  const [totalNumOfActi, settotalNumOfActi]=useState<number>()
 
 
 
@@ -51,8 +52,17 @@ const HomePage: React.FC = () => {
           date.format('MMMM DD, YYYY')
         );
       }
+ 
 
-      
+     const total = firestore.collection('users').doc(userId).collection('TracktUserRecords').get().then(function(querySnapshot) {      
+        console.log('number of doc:', querySnapshot.empty); 
+        settotalNumOfActi((querySnapshot.size)-1)
+       
+ });  
+
+
+
+
   return (
     <IonPage>
       <IonHeader>
@@ -65,7 +75,7 @@ const HomePage: React.FC = () => {
       <IonContent className="ion-padding">
       {entries2.map((entry) => 
         <IonLabel>
-          <h1 className="h1-text">Welcome back @{entry.UserName}</h1>
+          <h1 className="h1-text">Welcome back @username {entry.UserName}</h1>
           <h2></h2>
         </IonLabel> )}
 
@@ -81,9 +91,9 @@ const HomePage: React.FC = () => {
 
             <IonItem>
               <IonLabel>
-                Total completed activities:
+               Number of record:
               </IonLabel>
-              <IonBadge color="secondary" slot="end">11hrs</IonBadge>
+              <IonBadge color="secondary" slot="end">{totalNumOfActi}</IonBadge>
             </IonItem>
 
           </IonCard>  {/* )}  */}
