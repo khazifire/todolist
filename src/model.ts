@@ -7,6 +7,7 @@ export interface Entry {
     pictureUrl: string;
     UserName: string;
     email: string;
+    totalTimeWorked: any;
 
 }
 

@@ -12,6 +12,8 @@ import {
   IonIcon,
   IonThumbnail,
   IonImg,
+  IonCard,
+  IonBadge,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
@@ -20,12 +22,20 @@ import { Entry, toEntry } from "../model";
 import { useAuth } from "../auth";
 import { add as addIcon} from 'ionicons/icons';
 import moment from 'moment';
+import "./settingPage.css"
 
 const HomePage: React.FC = () => {
   const { userId } = useAuth();
  
   const [entries, setEntries] = useState<Entry[]>([]);
-  const [entry, setEntry] = useState<Entry>();
+  const [entries2, setEntries2] = useState<Entry[]>([]);
+
+
+
+  useEffect(() => {
+    const entriesRef = firestore.collection('users').doc(userId).collection('UserInfo');
+    return entriesRef.onSnapshot(({docs})=> setEntries2(docs.map(toEntry)));   /*  checks for new data on firestore */  
+      }, []);
 
   useEffect(() => {
     const entriesRef = firestore.collection('users').doc(userId).collection('TracktUserRecords');
@@ -41,38 +51,66 @@ const HomePage: React.FC = () => {
           date.format('MMMM DD, YYYY')
         );
       }
+
+      
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-        <IonTitle>HOME</IonTitle>
+        <IonTitle>Dashboard</IonTitle>
       
         </IonToolbar>
       </IonHeader>
+      
       <IonContent className="ion-padding">
-        <IonLabel>Strive to be productive</IonLabel>
-        <IonList>
-          {entries.map((entry) => 
-            <IonItem button key={entry.id} routerLink={`/my/entry/${entry.id}`}>
-              
+      {entries2.map((entry) => 
+        <IonLabel>
+          <h1 className="h1-text">Welcome back @{entry.UserName}</h1>
+          <h2></h2>
+        </IonLabel> )}
+
+   {/*      {entries.map((entry) =>  */}
+        <IonCard>
+        {/*     <IonItem>
               <IonLabel>
-                <h1> {formatDate(entry.date)}</h1>
-                <h2> {entry.title}</h2>
+                Total time worked:
               </IonLabel>
-             
+              <IonBadge color="primary" slot="end">{ {entry.totalTimeWorked} }</IonBadge>
+            </IonItem> */}
+
+
+            <IonItem>
+              <IonLabel>
+                Total completed activities:
+              </IonLabel>
+              <IonBadge color="secondary" slot="end">11hrs</IonBadge>
             </IonItem>
-          )}
-        </IonList>
-     
-        <IonFab vertical="bottom" horizontal="end">
-        <IonFabButton routerLink="TimeTracker">
-        <IonIcon icon={addIcon} />
-        </IonFabButton>
-       </IonFab>
+
+          </IonCard>  {/* )}  */}
+          
+           
+          <IonList>
+          {entries.map((entry) =>
+              <IonItem button key={entry.id} routerLink={`/my/entry/${entry.id}`}>
+
+                <IonLabel>
+                  <h1> {formatDate(entry.date)}</h1>
+                  <h2> {entry.title}</h2>
+                </IonLabel>  
+
+              </IonItem>
+      )}
+            </IonList>
+
+              <IonFab vertical="bottom" horizontal="end">
+                <IonFabButton routerLink="TimeTracker">
+                  <IonIcon icon={addIcon} />
+                </IonFabButton>
+              </IonFab>
     
-      
-      
-      </IonContent>
+            
+        
+              </IonContent>  
     </IonPage>
   );
 };

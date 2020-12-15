@@ -15,57 +15,45 @@ import {
   IonText,
   IonAvatar,
   IonPopover,
+  IonAlert,
+  IonButtons,
+  IonCardContent,
+  IonInput,
 } from '@ionic/react';
-import React, { useState ,useEffect} from 'react';
+
+import React, { useState ,useEffect, useContext} from 'react';
 import { auth } from '../firebase';
 import { firestore } from "../firebase";
-
+import  formatDate  from "../dateFunction";
 import { Entry, toEntry } from "../model";
-import { useAuth } from "../auth";
+import {  UserContext ,useAuth  } from "../auth";
 
 
-
+import "./settingPage.css"
+import firebase from 'firebase';
 
 
 const toggleDarkModeHandler = () => {
   document.body.classList.toggle("dark");
 };
+const [showClosingAlert, setshowClosingAlert] =useState(false);
 
 const SettingsPage: React.FC = () => {
-  const { userId } = useAuth();
   const [entries, setEntries] = useState<Entry[]>([]);
+  const { userId } = useAuth();
 
-  const [PopoverUsername, setPopoverUsername] = useState(false);
-  const [PopoverPassword, setPopoverPassword] = useState(false);
-  const [PopoverEmail, setPopoverEmail] = useState(false);
-  const [PopoverChangePic, setPopoverChangePic] = useState(false);
 
-  useEffect(() => {
-    const entriesRef = firestore.collection('users').doc(userId).collection('UserInfo');
-    return entriesRef.onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  
-      }, []);
 
-      
-const updateUsername = () => {
-  setPopoverUsername(true);
 
+
+useEffect(() => {
+  const entriesRef = firestore.collection('users').doc(userId).collection('UserInfo');
+  return entriesRef.onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  
+    }, []);
  
-};
 
-const updatePassword = () => {
-  console.log("hi bitc");
-  setPopoverPassword(true);
-};
 
-const updateEmail= () => {
-  console.log("hi bitc");
-  setPopoverEmail(true);
-};
 
-const changeProfilePic= () => {
-  console.log("hi bitc");
-  setPopoverChangePic(true);
-};
 
   return (
     <IonPage>
@@ -77,150 +65,93 @@ const changeProfilePic= () => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
+
       <IonContent className="ion-text-center" fullscreen>
-        <IonCard>
-        <IonItem>
-          <IonAvatar slot="start">
-            <img src="../../assets/placeholder.png" />
-            </IonAvatar>
-        <IonLabel>
-          <h3>Dan Kazimoto</h3>
-          <p>Dec 12, 2020</p>
-        </IonLabel>
-    </IonItem>
-
-          {/* <img
-            height="150 px"
-            src={"/assets/settings.svg"}
-            alt="setting image"
-          />
-
-          <IonItem >
-            <IonText color="primary" >
-              Edit Picture
-          </IonText>
-          </IonItem> */}
-        </IonCard>
-
-        <IonLabel>Account Information</IonLabel>
-
-        <IonCard>
-        {entries.map((entry) => 
-          <IonList>
+          <IonCard>
+          {entries.map((entry) => 
             <IonItem>
+
+              <IonAvatar  slot="start" >
+              <img  src="../../assets/placeholder.png" />
+              </IonAvatar>
+              <IonLabel >
+                <h1>{entry.UserName}</h1>
+                <h2>{entry.email}</h2>
+              
+              
+              </IonLabel>
+            </IonItem>
+          )}
+
+          </IonCard>
+
+          <IonLabel>Usage Information</IonLabel>
+
+          <IonCard>
+
             
-              <IonText color="primary" onClick={updateUsername} >
-                Change username: {entry.UserName}
-          </IonText>  
-            </IonItem> 
-           
+              <IonItem>
+
+                <IonText color="primary" >
+                  Total tracked time: 
+                </IonText>
+              </IonItem>
+
+              <IonItem>
+                <IonText color="primary" >
+                 
+                </IonText>
+              </IonItem>
+
+             
+
+            
+          </IonCard>
+          <IonLabel>Display</IonLabel>
+          <IonCard>
             <IonItem>
-              <IonText color="primary" onClick={updateEmail}>
-                Change Email: {entry.email}
-          </IonText>
-            </IonItem>
-
-            <IonItem>
-              <IonText color="primary" onClick={updatePassword}>
-                Change Password: **********
-          </IonText>
-            </IonItem>
-
-          </IonList> )}
-        </IonCard>
-        <IonLabel>Display</IonLabel>
-        <IonCard>
-          <IonItem>
-            <IonLabel> Switch Theme</IonLabel>
-            <IonToggle
-              slot="end"
-              name="darkMode"
-              onIonChange={toggleDarkModeHandler}
-            />
-          </IonItem>
-        </IonCard>
-
-        <IonButton
-         /*  color="medium" */
-          expand="block"
-         
-          onClick={() => auth.signOut()}
-
-        >
-          Logout
-    </IonButton>
-
-        {/*  <IonModal
-      isOpen={showFaqModal}
-      onDidDismiss={() => setFaqModal(false)!}
-    >
-      <FaqPage turnOffModal={turnOffFaq} />
-    </IonModal>
-
-    <IonModal
-      isOpen={showCreditModal}
-      onDidDismiss={() => setCreditModal(false)!}
-    >
-      <CreditsPage turnOffModal={turnOffCredit} />
-    </IonModal> */}
-
-      </IonContent>
-      <IonPopover isOpen={PopoverUsername} cssClass="conainer-of-Pop-Ups" onDidDismiss={(e) => setPopoverUsername(false)}>
-          <p className="centerText">updating username!</p>
-        
-          <IonButton className="IonButtonRadius" expand="block" onClick={() =>setPopoverUsername(false)}> Cancel  </IonButton>
-        </IonPopover>
-
-        <IonPopover isOpen={PopoverPassword} cssClass="conainer-of-Pop-Ups" onDidDismiss={(e) => setPopoverPassword(false)}>
-          <p className="centerText">pdating password!</p>
-        
-          <IonButton className="IonButtonRadius" expand="block" onClick={() =>setPopoverPassword(false)}> Cancel </IonButton>
-        </IonPopover>
-
-        <IonPopover isOpen={PopoverEmail} cssClass="conainer-of-Pop-Ups" onDidDismiss={(e) => setPopoverEmail(false)}>
-          <p className="centerText">updating email!</p>
-        
-          <IonButton className="IonButtonRadius" expand="block" onClick={() =>setPopoverEmail(false)}> Cancel </IonButton>
-        </IonPopover>
-
-        <IonPopover isOpen={PopoverChangePic} cssClass="conainer-of-Pop-Ups" onDidDismiss={(e) => setPopoverChangePic(false)}>
-          <p className="centerText">chnaging profile pic!</p>
-          
-          <IonButton className="IonButtonRadius" expand="block" onClick={() =>setPopoverChangePic(false)}> Cancel </IonButton>
-        </IonPopover>
-    </IonPage>
-  );
-};
-
-
-
-
-{/* <IonPage>
-<IonHeader>
-<IonToolbar>
-    <IonTitle>Settings</IonTitle>
-    </IonToolbar>
-</IonHeader>
-
-
-<IonItem>
               <IonLabel> Switch Theme</IonLabel>
               <IonToggle
                 slot="end"
                 name="darkMode"
-                onIonChange={toggleDarkModeHandler}
-              />
+                onIonChange={toggleDarkModeHandler} />
             </IonItem>
+          </IonCard>
 
-<IonContent className="ion-padding">
-  <IonButton color="medium" expand="block"
-    onClick={() => auth.signOut()}>
-    Logout
-  </IonButton>
-</IonContent>
-</IonPage>
-);
-}; */}
+          <IonButton
+            /*  color="medium" */
+            expand="block"
 
+            onClick={() => setshowClosingAlert(true)}
+
+          >
+            Logout
+          </IonButton>
+          <IonAlert
+            isOpen={showClosingAlert}
+            onDidDismiss={() => setshowClosingAlert(false)}
+            cssClass='my-custom-class'
+            header={'Log out!'}
+            /*  subHeader={'Please fill up, all the inputs'} */
+            message={'Do you want to log out'}
+            buttons={[{
+              text: 'No, Cancel',
+              cssClass: 'secondary',
+            },
+            {
+              text: ' Log Out',
+              cssClass: 'alertcolor',
+
+              handler: () => {
+                auth.signOut();
+
+              }
+            }
+            ]} />
+            </IonContent>
+ 
+    </IonPage>
+  );
+};
 
 export default SettingsPage;
