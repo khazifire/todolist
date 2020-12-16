@@ -23,12 +23,9 @@ import { Redirect } from 'react-router';
 
 
 
-//import { Link } from 'react-router-dom';
 
-interface Props {
-  onLogin: () => void;
-  //loggedIn:Boolean;
-}
+
+
 
 const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -56,6 +53,7 @@ const RegisterPage: React.FC = () => {
    const entriesRef=firestore.collection('users').doc(userId).collection('UserInfo');
   const entryData = { UserName,email };
   const entryRef =  entriesRef.add(entryData);
+  console.log( entryRef);
 
     return <Redirect to="/my/entries"/>;
   }

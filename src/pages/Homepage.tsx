@@ -10,14 +10,11 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
-  IonThumbnail,
-  IonImg,
   IonCard,
   IonBadge,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
-
 import { Entry, toEntry } from "../model";
 import { useAuth } from "../auth";
 import { add as addIcon} from 'ionicons/icons';
@@ -26,7 +23,6 @@ import "./settingPage.css"
 
 const HomePage: React.FC = () => {
   const { userId } = useAuth();
- 
   const [entries, setEntries] = useState<Entry[]>([]);
   const [entries2, setEntries2] = useState<Entry[]>([]);
   const [totalNumOfActi, settotalNumOfActi]=useState<number>()
@@ -36,16 +32,14 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const entriesRef = firestore.collection('users').doc(userId).collection('UserInfo');
     return entriesRef.onSnapshot(({docs})=> setEntries2(docs.map(toEntry)));   /*  checks for new data on firestore */  
-      }, []);
+      }, [userId]);
 
   useEffect(() => {
     const entriesRef = firestore.collection('users').doc(userId).collection('TracktUserRecords');
      console.log('You are in HomePage',  entriesRef);
      
     return entriesRef.orderBy('date','desc').limit(7).onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  
-      }, []);
-
-
+      }, [userId]);
       const formatDate = (inputDate: string) => {
         const date = moment(inputDate);
         return (
@@ -53,15 +47,12 @@ const HomePage: React.FC = () => {
         );
       }
  
-
   const total = firestore.collection('users').doc(userId).collection('TracktUserRecords').get().then(function(querySnapshot) {      
         console.log('number of doc:', querySnapshot.empty); 
         settotalNumOfActi((querySnapshot.size)-1)
+        console.log(total);
        
  });  
-
-
-
 
   return (
     <IonPage>
@@ -79,21 +70,19 @@ const HomePage: React.FC = () => {
           <h2></h2>
         </IonLabel> )}
 
-   {/*      {entries.map((entry) =>  */}
         <IonCard>
-        {/*     <IonItem>
+            <IonItem>
               <IonLabel>
-                Total time worked:
+               Number of records:
               </IonLabel>
-              <IonBadge color="primary" slot="end">{ {entry.totalTimeWorked} }</IonBadge>
-            </IonItem> */}
-
+              <IonBadge color="secondary" slot="end">{totalNumOfActi}</IonBadge>
+            </IonItem>
 
             <IonItem>
               <IonLabel>
-               Number of record:
+               Total tracked Time:
               </IonLabel>
-              <IonBadge color="secondary" slot="end">{totalNumOfActi}</IonBadge>
+              <IonBadge color="secondary" slot="end">#!</IonBadge>
             </IonItem>
 
           </IonCard>  {/* )}  */}

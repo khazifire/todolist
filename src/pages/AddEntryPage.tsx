@@ -12,7 +12,6 @@ import {
   IonItem,
   IonTextarea,
   IonDatetime
-
 } from "@ionic/react";
 import React, { useEffect, useRef, useState } from "react";
 import { firestore, storage } from "../firebase";

@@ -1,5 +1,4 @@
 import {
-  IonApp,
   IonContent,
   IonHeader,
   IonTitle,
@@ -10,27 +9,17 @@ import {
   IonLabel,
   IonToggle,
   IonCard,
-  IonList,
-  IonModal,
-  IonText,
   IonAvatar,
-  IonPopover,
   IonAlert,
-  IonButtons,
-  IonCardContent,
-  IonInput,
 } from '@ionic/react';
 
-import React, { useState ,useEffect, useContext} from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { firestore } from "../firebase";
-import  formatDate  from "../dateFunction";
 import { Entry, toEntry } from "../model";
-import {  UserContext ,useAuth  } from "../auth";
-
-
+import { useAuth } from "../auth";
 import "./settingPage.css"
-import firebase from 'firebase';
+
 
 
 const toggleDarkModeHandler = () => {
@@ -41,33 +30,13 @@ const toggleDarkModeHandler = () => {
 const SettingsPage: React.FC = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const { userId } = useAuth();
-  const [showClosingAlert, setshowClosingAlert] =useState(false);
+  const [showClosingAlert, setshowClosingAlert] = useState(false);
 
 
-
-
-
-useEffect(() => {
-  const entriesRef = firestore.collection('users').doc(userId).collection('UserInfo');
-  return entriesRef.onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  
-    }, []);
- 
-
-    const executeOnce = (change, context, task) => {
-    const eventRef = firestore.collection('events').doc(context.eventId);
-
-    return firestore.runTransaction(t =>
-        t
-         .get(eventRef)
-         .then(docSnap => (docSnap.exists ? null : task(t)))
-         .then(() => t.set(eventRef, { processed: true }))
-    );
-};
-
-
-
-
-
+  useEffect(() => {
+    const entriesRef = firestore.collection('users').doc(userId).collection('UserInfo');
+    return entriesRef.onSnapshot(({ docs }) => setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */
+  }, []);
 
   return (
     <IonPage>
@@ -81,89 +50,69 @@ useEffect(() => {
       </IonHeader>
 
       <IonContent className="ion-text-center" fullscreen>
-          <IonCard>
-          {entries.map((entry) => 
+        <IonCard>
+          {entries.map((entry) =>
             <IonItem>
 
-              <IonAvatar  slot="start" >
-              <img  src="../../assets/placeholder.png" />
+              <IonAvatar slot="start" >
+                <img src="../../assets/placeholder.png" alt=""/>
               </IonAvatar>
               <IonLabel >
                 <h1>{entry.UserName}</h1>
                 <h2>{entry.email}</h2>
-              
-              
+
+
               </IonLabel>
             </IonItem>
           )}
 
-          </IonCard>
+        </IonCard>
 
-          <IonLabel>Usage Information</IonLabel>
 
-          <IonCard>
+        <IonLabel>Display  </IonLabel>
+        <IonCard>
+          <IonItem>
+            <IonLabel> Switch Theme (Light | Dark)</IonLabel>
+            <IonToggle
+              slot="end"
+              name="darkMode"
+              onIonChange={toggleDarkModeHandler} />
+          </IonItem>
+        </IonCard>
 
-            
-              <IonItem>
+        <IonButton
+          /*  color="medium" */
+          expand="block"
 
-                <IonText color="primary" >
-                  Total tracked time: 
-                </IonText>
-              </IonItem>
+          onClick={() => setshowClosingAlert(true)}
 
-              <IonItem>
-                <IonText color="primary" >
-                 
-                </IonText>
-              </IonItem>
-
-             
-
-            
-          </IonCard>
-          <IonLabel>Display</IonLabel>
-          <IonCard>
-            <IonItem>
-              <IonLabel> Switch Theme</IonLabel>
-              <IonToggle
-                slot="end"
-                name="darkMode"
-                onIonChange={toggleDarkModeHandler} />
-            </IonItem>
-          </IonCard>
-
-          <IonButton
-            /*  color="medium" */
-            expand="block"
-
-            onClick={() => setshowClosingAlert(true)}
-
-          >
-            Logout
+        >
+          Logout
           </IonButton>
-          <IonAlert
-            isOpen={showClosingAlert}
-            onDidDismiss={() => setshowClosingAlert(false)}
-            cssClass='my-custom-class'
-            header={'Log out!'}
-            /*  subHeader={'Please fill up, all the inputs'} */
-            message={'Do you want to log out'}
-            buttons={[{
-              text: 'No, Cancel',
-              cssClass: 'secondary',
-            },
-            {
-              text: ' Log Out',
-              cssClass: 'alertcolor',
+        <IonAlert
+          isOpen={showClosingAlert}
+          onDidDismiss={() => setshowClosingAlert(false)}
+          cssClass='my-custom-class'
+          header={'Log out!'}
+          /*  subHeader={'Please fill up, all the inputs'} */
+          message={'Do you want to log out'}
+          buttons={[{
+            text: 'No, Cancel',
+            cssClass: 'secondary',
+          },
+          {
+            text: ' Log Out',
+            cssClass: 'alertcolor',
 
-              handler: () => {
-                auth.signOut();
+            handler: () => {
+              auth.signOut();
 
-              }
             }
-            ]} />
-            </IonContent>
- 
+          }
+          ]} />
+
+      </IonContent>
+
     </IonPage>
   );
 };

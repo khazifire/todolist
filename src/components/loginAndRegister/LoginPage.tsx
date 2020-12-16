@@ -6,7 +6,7 @@ import {
   IonInput,
   IonButton,
   IonText,
-/*   IonLoading, */
+
   IonList,
   IonCard,
   IonCardHeader,
@@ -22,10 +22,7 @@ import "../loginAndRegister/StylesSignUP.css";
 import { Redirect } from "react-router";
 
 
-/* interface Props {
-  onLogin: () => void;
 
-} */
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");

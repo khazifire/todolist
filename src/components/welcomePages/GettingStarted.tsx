@@ -1,35 +1,24 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardSubtitle,
   IonCardTitle,
-  IonCol,
   IonContent,
-  IonGrid,
-  IonHeader,
-  IonImg,
-  IonLabel,
-  IonPage,
-  IonRow,
   IonSlide,
   IonSlides,
   IonText,
-  IonTitle,
-  IonToggle,
-  IonToolbar,
   IonIcon
 } from "@ionic/react";
 import "./welcome.css"
 import { arrowForward } from 'ionicons/icons';
 
-import { useHistory } from "react-router";
+
 /* import { turnOffModal } from "../model"; */
 
 const GettingStarted: React.FC = () => {
-  const history = useHistory();
+ 
 
   return (
     <>
@@ -41,7 +30,7 @@ const GettingStarted: React.FC = () => {
            
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
-                  <img  height="300 px"src="/assets/welcome.svg"  />
+                  <img  height="300 px"src="/assets/welcome.svg"  alt="" />
                 </div>
                 <br />
                 <br />
@@ -66,7 +55,7 @@ const GettingStarted: React.FC = () => {
                 <br></br>
                
                 <div className="ion-text-center ">
-                  <img height="50px" src="/assets/productive.svg" />
+                  <img height="50px" src="/assets/productive.svg" alt="" />
                 </div>
                
               </IonCardHeader>
@@ -86,7 +75,7 @@ const GettingStarted: React.FC = () => {
             
               <IonCardHeader>
                 <div className="ion-text-center">
-                  <img height="50 px" src="/assets/login.svg"  />
+                  <img height="50 px" src="/assets/login.svg"  alt="" />
                 </div>
                 <br />
             
