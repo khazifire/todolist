@@ -63,13 +63,12 @@ const RegisterPage: React.FC = () => {
   return (
 <IonPage>
     <IonContent color="light" fullscreen>
-      <IonCard className="ionCardstyle">
+      <IonCard className="ionCardstyle2">
       <IonCardHeader>
-                  <img  className="imageSize2"src="/assets/signUp_illustration.svg"  />
-                <IonCardSubtitle className="centerText">
+      <IonCardSubtitle className="sizeee">
                   Sign Up
                 </IonCardSubtitle>
-                <IonCardTitle className="centerText">Welcome!</IonCardTitle>
+                <IonCardTitle color="primary" >Create a new account</IonCardTitle>
               </IonCardHeader>
 
           <IonCardContent>
@@ -77,6 +76,7 @@ const RegisterPage: React.FC = () => {
 
             <IonItem>
                 <IonLabel position="stacked">Username</IonLabel>
+             
                 <IonInput
                 className="input100"
                   type="email"

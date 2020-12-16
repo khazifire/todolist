@@ -37,67 +37,66 @@ const GettingStarted: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonSlides>
           <IonSlide>
-            <IonCard className="IonCardFaq">
+            <IonCard className="IonCardWel">
            
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
                   <img  height="300 px"src="/assets/welcome.svg"  />
                 </div>
                 <br />
-                <IonCardSubtitle className="centerText">
-                  Hello!
-                </IonCardSubtitle>
-                <IonCardTitle className="centerText">Welcome</IonCardTitle>
+                <br />
+                <IonCardTitle ><h1>Welcome</h1></IonCardTitle>
               </IonCardHeader>
 
               <IonCardContent>
                 <IonText>
-                  <div className="ion-text-center">
-                    Swipe Left  to continue 
-                    <IonIcon  icon={arrowForward} ></IonIcon>
-                  </div>
+                   <h2> Swipe Left  to continue 
+                    <IonIcon  icon={arrowForward} ></IonIcon></h2>
+                   <br />
                 </IonText>
               </IonCardContent>
             </IonCard>
           </IonSlide>
           <IonSlide>
-            <IonCard className="IonCardFaq">
+            <IonCard className="IonCardWel">
               <IonCardHeader>
-                <div className="ion-text-center centerImg">
-                  <img height="150 px" src="/assets/productive.svg" />
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+               
+                <div className="ion-text-center ">
+                  <img height="50px" src="/assets/productive.svg" />
                 </div>
                
               </IonCardHeader>
 
-              <IonCardContent>
-                <IonText>
-                  <div className="ion-text-center">
-                  TRACKT is a productivity tool, which helps you keep track of time spent on any given activities. And does not make use of any collected data.
-                  </div>
-                </IonText>
+              <IonCardContent className="ion-text-left">
+                
+                  <p >TRACKT is a productivity tool, which helps you keep track of time spent on any given activities. And does not make use of any collected data.
+                  </p>
+                  <br></br>  
               </IonCardContent>
             </IonCard>
           </IonSlide>
           
           <IonSlide>
-            <IonCard className="IonCardFaq">
-              <br />
-              <br />
+            <IonCard className="IonCardWel">
+             
+            
               <IonCardHeader>
-                <div className="ion-text-center centerImg">
-                  <img height="120 px" src="/assets/login.svg"  />
-                </div>{" "}
+                <div className="ion-text-center">
+                  <img height="50 px" src="/assets/login.svg"  />
+                </div>
                 <br />
-                {/* <IonCardSubtitle className="centerText">
-                  Contact Us
-                </IonCardSubtitle> */}
-                <IonCardTitle className="centerText">Getting Started</IonCardTitle>
+            
+                <IonCardTitle><h2>Getting Started</h2></IonCardTitle>
               </IonCardHeader>
 
               <IonCardContent >
-                <br />
-                <IonButton  className="buttonsStyle" routerLink="/login">Login</IonButton>  <br />
-               <IonButton  className="buttonsStyle" routerLink="/register"> Create an Account</IonButton>
+              <IonButton   routerLink="/register"> Create a new account</IonButton>
+                <IonButton  color="secondary" fill="clear" routerLink="/login">Login to an existing  account</IonButton>  <br />
+               
                
               </IonCardContent>
             </IonCard>
@@ -105,9 +104,7 @@ const GettingStarted: React.FC = () => {
          
          
         </IonSlides>
-        {/* <IonButton fill="clear" expand="full" >
-          SKIP
-        </IonButton> */}
+       
       </IonContent>
     </>
   );

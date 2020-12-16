@@ -54,7 +54,7 @@ const HomePage: React.FC = () => {
       }
  
 
-     const total = firestore.collection('users').doc(userId).collection('TracktUserRecords').get().then(function(querySnapshot) {      
+  const total = firestore.collection('users').doc(userId).collection('TracktUserRecords').get().then(function(querySnapshot) {      
         console.log('number of doc:', querySnapshot.empty); 
         settotalNumOfActi((querySnapshot.size)-1)
        
@@ -75,7 +75,7 @@ const HomePage: React.FC = () => {
       <IonContent className="ion-padding">
       {entries2.map((entry) => 
         <IonLabel>
-          <h1 className="h1-text">Welcome back @username {entry.UserName}</h1>
+          <h1 className="h1-text">Welcome back @{entry.UserName}</h1>
           <h2></h2>
         </IonLabel> )}
 

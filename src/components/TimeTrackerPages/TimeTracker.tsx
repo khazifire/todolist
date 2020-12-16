@@ -45,6 +45,7 @@ const SettingsPage: React.FC = () => {
 
   const [showClosingAlert, setshowClosingAlert] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [TimeWorked, setTimeWorked]=useState<any>("");
 
 
 
@@ -85,7 +86,8 @@ const SettingsPage: React.FC = () => {
     const entryData = { date, title, description, AmountOfTimeWorked, totalTimeWorked };
     const entryRef = await entriesRef.add(entryData);
     console.log('saved:', entryRef.id);
-    history.goBack();
+    
+    history.goBack( "/login");
   }
 
   const formatDay = (inputDate) => {
@@ -168,7 +170,7 @@ const SettingsPage: React.FC = () => {
         
             <IonRow>
               <IonCol  >
-         <IonButton    onClick={() => { stop(); reset(); handleSaveTime(); setPopoverTimer(false);setShowPopover(true);setShowModal(false)}}> Stop and Save </IonButton>
+         <IonButton    onClick={() => { stop(); setTimeWorked({Timer.Seconds}); reset(); handleSaveTime(); setPopoverTimer(false);setShowPopover(true);setShowModal(false)}}> Stop and Save </IonButton>
          </IonCol>
 
          <IonCol >
@@ -202,7 +204,7 @@ const SettingsPage: React.FC = () => {
               text: 'Yes, Quit',
               cssClass: 'alertcolor',
              
-              handler: () => { stop(); reset(); setShowModal(false)
+              handler: () => { stop(); reset(); setShowModal(false); 
               
               }
             }
@@ -216,7 +218,7 @@ const SettingsPage: React.FC = () => {
 
         <IonPopover isOpen={showPopover}  backdropDismiss={false}>
           <h1 className="centerText">Congratulation!</h1>
-          <h2 className="centerText">You spent {AmountOfTimeWorked} seconds working </h2>
+          <h2 className="centerText">You spent {AmountOfTimeWorked} seconds working and also {TimeWorked} </h2>
 
           <IonButton className="IonButtonRadius" expand="block" onClick={() => workedTimePopUp()}>  Continue </IonButton>
         </IonPopover>

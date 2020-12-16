@@ -20,7 +20,7 @@ import { useAuth } from "../../auth";
 import { auth } from "../../firebase";
 import "../loginAndRegister/StylesSignUP.css";
 import { Redirect } from "react-router";
-import logo from "./logo.png"
+
 
 /* interface Props {
   onLogin: () => void;
@@ -56,11 +56,11 @@ const LoginPage: React.FC = () => {
     <IonContent color="light" fullscreen >
       <IonCard className="ionCardstyle">
         <IonCardHeader>
-                  <img   className="imageSize"src="/assets/login_illustration.svg"  />
-                <IonCardSubtitle className="centerText">
-                  LOGIN
+           
+                <IonCardSubtitle className="sizeee">
+                  Login
                 </IonCardSubtitle>
-                <IonCardTitle className="centerText">Welcome back</IonCardTitle>
+                <IonCardTitle color="primary" >Welcome back!</IonCardTitle>
               </IonCardHeader>
         
 
