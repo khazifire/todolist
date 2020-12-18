@@ -4,123 +4,128 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonList,
-  IonItem,
   IonLabel,
-  IonFab,
-  IonFabButton,
-  IonIcon,
-  IonThumbnail,
-  IonImg,
   IonCard,
-  IonBadge,
+  IonIcon,
+  IonAvatar,
+  IonItem,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { firestore } from "../../firebase/firebase";
-
 import { Entry, toEntry } from "../../firebase/model";
 import { useAuth } from "../../firebase/auth";
-import { add as addIcon} from 'ionicons/icons';
-import moment from 'moment';
-import "./settingPage.css"
+
+import moment from "moment";
+import "../settings/SettingsPage";
+import { walletOutline, cardOutline } from "ionicons/icons";
+import { LineChart, Line, YAxis, XAxis, CartesianGrid,ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 const HomePage: React.FC = () => {
   const { userId } = useAuth();
- 
+
   const [entries, setEntries] = useState<Entry[]>([]);
   const [entries2, setEntries2] = useState<Entry[]>([]);
-  const [totalNumOfActi, settotalNumOfActi]=useState<number>()
-
-
+  const [totalNumOfActi, settotalNumOfActi] = useState<number>();
 
   useEffect(() => {
-    const entriesRef = firestore.collection('users').doc(userId).collection('UserInfo');
-    return entriesRef.onSnapshot(({docs})=> setEntries2(docs.map(toEntry)));   /*  checks for new data on firestore */  
-      }, []);
+    const entriesRef = firestore
+      .collection("users")
+      .doc(userId)
+      .collection("UserInfo");
+    return entriesRef.onSnapshot(({ docs }) =>
+      setEntries2(docs.map(toEntry))
+    ); /*  checks for new data on firestore */
+  }, []);
 
   useEffect(() => {
-    const entriesRef = firestore.collection('users').doc(userId).collection('TracktUserRecords');
-     console.log('You are in HomePage',  entriesRef);
-     
-    return entriesRef.orderBy('date','desc').limit(7).onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  
-      }, []);
+    const entriesRef = firestore
+      .collection("users")
+      .doc(userId)
+      .collection("UserRecords");
+    console.log("You are in HomePage", entriesRef);
 
+    return entriesRef
+      .orderBy("date", "desc")
+      .limit(7)
+      .onSnapshot(({ docs }) =>
+        setEntries(docs.map(toEntry))
+      ); /*  checks for new data on firestore */
+  }, []);
 
-      const formatDate = (inputDate: string) => {
-        const date = moment(inputDate);
-        return (
-          date.format('MMMM DD, YYYY')
-        );
-      }
- 
-
-  const total = firestore.collection('users').doc(userId).collection('TracktUserRecords').get().then(function(querySnapshot) {      
-        console.log('number of doc:', querySnapshot.empty); 
-        settotalNumOfActi((querySnapshot.size)-1)
-       
- });  
-
-
-
+  const data = [
+    {
+        "name": "Dec 2020",
+        "Income": 10,
+        "Expenses": 50
+    },
+    {
+        "name": "Jan 2021",
+        "Income": 50,
+        "Expenses": 100
+    },
+    {
+        "name": "Feb 2021",
+        "Income": 100,
+        "Expenses": 10
+    }
+]
 
   return (
-    <IonPage>
+    <IonPage >
       <IonHeader>
         <IonToolbar>
-        <IonTitle>Dashboard</IonTitle>
-      
+          <IonTitle>Home</IonTitle>
         </IonToolbar>
       </IonHeader>
-      
-      <IonContent className="ion-padding">
-      {entries2.map((entry) => 
-        <IonLabel>
-          <h1 className="h1-text">Welcome back @{entry.UserName}</h1>
-          <h2></h2>
-        </IonLabel> )}
-
-   {/*      {entries.map((entry) =>  */}
-        <IonCard>
-        {/*     <IonItem>
-              <IonLabel>
-                Total time worked:
-              </IonLabel>
-              <IonBadge color="primary" slot="end">{ {entry.totalTimeWorked} }</IonBadge>
-            </IonItem> */}
-
-
-            <IonItem>
-              <IonLabel>
-               Number of record:
-              </IonLabel>
-              <IonBadge color="secondary" slot="end">{totalNumOfActi}</IonBadge>
-            </IonItem>
-
-          </IonCard>  {/* )}  */}
+  
+   
           
-           
-          <IonList>
-          {entries.map((entry) =>
-              <IonItem button key={entry.id} routerLink={`/my/entry/${entry.id}`}>
-
-                <IonLabel>
-                  <h1> {formatDate(entry.date)}</h1>
-                  <h2> {entry.title}</h2>
-                </IonLabel>  
-
-              </IonItem>
-      )}
-            </IonList>
-
-              <IonFab vertical="bottom" horizontal="end">
-                <IonFabButton routerLink="TimeTracker">
-                  <IonIcon icon={addIcon} />
-                </IonFabButton>
-              </IonFab>
-    
-            
+          <IonCard>
         
-              </IonContent>  
+          <ResponsiveContainer width="100%" height={300}>
+          <LineChart  data={data}
+                margin={{ top: 10, right: 30, left: 0, bottom: 30 }}>
+ 
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                
+                <Legend />
+                <Line type="monotone" dataKey="Income" stroke="#044259" />
+                <Line type="monotone" dataKey="Expenses" stroke="#428cff" />
+            </LineChart>
+            </ResponsiveContainer>
+            </IonCard>
+       
+     
+
+     
+      
+      <IonCard  className="ion-text-center"> 
+      <IonLabel ><h1>My Account</h1> </IonLabel>
+
+      <IonItem>
+          <IonAvatar slot="start">
+            <IonIcon icon={cardOutline} size="large" />
+          </IonAvatar>
+          <IonLabel> Income: 200 baht</IonLabel>
+        </IonItem>
+
+        <IonItem>
+          <IonAvatar slot="start">
+            <IonIcon icon={walletOutline} size="large" />
+          </IonAvatar>
+          <IonLabel> Expenses: 200 baht</IonLabel>
+        </IonItem>
+
+        <IonItem>
+          <IonAvatar slot="start">
+            <IonIcon icon={cardOutline} size="large" />
+          </IonAvatar>
+          <IonLabel> Balance: 0 baht</IonLabel>
+        </IonItem>
+       
+      </IonCard>
     </IonPage>
   );
 };

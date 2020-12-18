@@ -4,16 +4,12 @@ import 'firebase/firestore';
 import 'firebase/storage';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDmeg19JS0pqBz4gBII4UGKTWAD3c48jic",
-    authDomain: "trackt-eee2f.firebaseapp.com",
-    databaseURL: "https://trackt-eee2f.firebaseio.com",
-    projectId: "trackt-eee2f",
-    storageBucket: "trackt-eee2f.appspot.com",
-    messagingSenderId: "1003112233709",
-    appId: "1:1003112233709:web:3ff4921a00f8d7ba816ae4",
-    measurementId: "G-075ZBJ5P5D"
-
-    
+    apiKey: "AIzaSyBAJjxmE8bnFi9GkAnCrQk3qxsX3MDfqZ8",
+    authDomain: "mihome-9c98f.firebaseapp.com",
+    projectId: "mihome-9c98f",
+    storageBucket: "mihome-9c98f.appspot.com",
+    messagingSenderId: "172881772634",
+    appId: "1:172881772634:web:4f2cb421c15e7cc23d9863"
   };
   
  const app = firebase.initializeApp(firebaseConfig);

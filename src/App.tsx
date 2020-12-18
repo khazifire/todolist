@@ -6,15 +6,15 @@ import {
 import React from 'react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { AuthContext, useAuthInit } from './auth';
-import { auth } from './firebase';
+import { AuthContext, useAuthInit } from './firebase/auth';
+import { auth } from './firebase/firebase';
 
 
 import LoginPage from './components/loginAndRegister/LoginPage';
 import AppTab from './AppTab';
-import NotFoundPage from './pages/NotFoundPage';
+import NotFoundPage from './components/pages/NotFoundPage';
 import RegisterPage from './components/loginAndRegister/RegisterPage';
-import GettingStarted from './components/welcomePages/GettingStarted';
+
 
 
 
@@ -34,9 +34,8 @@ const App: React.FC = () => {
       <AuthContext.Provider value={auth}>
         <IonReactRouter>
           <Switch>
-          <Route exact path="/welcome">
-              <GettingStarted />
-            </Route>
+        
+         
             <Route exact path="/login">
               <LoginPage />
             </Route>
@@ -47,7 +46,7 @@ const App: React.FC = () => {
               <AppTab />
             </Route>
         <Route exact path="/" 
-        render={() =><Redirect to="/welcome" />}
+        render={() =><Redirect to="/login" />}
         />
             
 
