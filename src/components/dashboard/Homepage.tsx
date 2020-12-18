@@ -16,10 +16,10 @@ import {
   IonBadge,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-import { firestore } from "../firebase";
+import { firestore } from "../../firebase/firebase";
 
-import { Entry, toEntry } from "../model";
-import { useAuth } from "../auth";
+import { Entry, toEntry } from "../../firebase/model";
+import { useAuth } from "../../firebase/auth";
 import { add as addIcon} from 'ionicons/icons';
 import moment from 'moment';
 import "./settingPage.css"

@@ -22,11 +22,11 @@ import {
 } from '@ionic/react';
 
 import React, { useState ,useEffect, useContext} from 'react';
-import { auth } from '../firebase';
-import { firestore } from "../firebase";
-import  formatDate  from "../dateFunction";
-import { Entry, toEntry } from "../model";
-import {  UserContext ,useAuth  } from "../auth";
+import { auth } from '../../firebase/firebase';
+import { firestore } from "../../firebase/firebase";
+import  formatDate  from "../../js-functions/dateFunction";
+import { Entry, toEntry } from "../../firebase/model";
+import {  UserContext ,useAuth  } from "../../firebase/auth";
 
 
 import "./settingPage.css"

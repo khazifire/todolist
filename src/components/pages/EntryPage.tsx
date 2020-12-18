@@ -11,9 +11,9 @@ import {
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router";
-import { firestore } from "../firebase";
-import { Entry, toEntry } from "../model";
-import { useAuth } from "../auth";
+import { firestore } from "../../firebase/firebase";
+import { Entry, toEntry } from "../../firebase/model";
+import { useAuth } from "../../firebase/auth";
 import { trash as deleteIcon } from 'ionicons/icons';
 import { useHistory } from "react-router-dom";
 

@@ -15,8 +15,8 @@ import {
 
 } from "@ionic/react";
 import React, { useEffect, useRef, useState } from "react";
-import { firestore, storage } from "../firebase";
-import { useAuth } from "../auth";
+import { firestore, storage } from "../../firebase/firebase";
+import { useAuth } from "../../firebase/auth";
 import { useHistory } from "react-router-dom";
 
 
