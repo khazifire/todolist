@@ -1,26 +1,14 @@
-import {
-    IonTabBar, 
-    IonLabel,
-    IonTabButton,
-    IonTabs,
-    IonIcon,
-    IonRouterOutlet
-  } from '@ionic/react';
-  
+import {IonTabBar, IonLabel,IonTabButton,IonTabs,IonIcon,IonRouterOutlet} from '@ionic/react';
+
   import React from 'react';
   import {  home as homeIcon, barChart, cog, hourglass } from 'ionicons/icons';
   import { Redirect, Route } from 'react-router-dom';
-  
-  import Homepage from './pages/Homepage';
-  import SettingsPage from './pages/SettingsPage';
-  import EntryPage from './pages/EntryPage';
-  import AddEntryPage from './pages/AddEntryPage';
-  import TimeTracker from './components/TimeTrackerPages/TimeTracker';
-
-
-
-import { useAuth } from './auth';
-import ProgressReport from './pages/ProgressReport';
+  import Homepage from './components/dashboard/Homepage';
+  import SettingsPage from './components/settings/SettingsPage';
+  import EntryPage from './components/pages/EntryPage';
+  import AddEntryPage from './components/pages/AddEntryPage';
+  import { useAuth } from './firebase/auth';
+  import ProgressReport from './components/pages/ProgressReport';
   
   
   const AppTab: React.FC = () => {
@@ -49,9 +37,8 @@ import ProgressReport from './pages/ProgressReport';
           <SettingsPage />
         </Route>
 
-        <Route path="/my/TimeTracker" component={TimeTracker}> 
-          <TimeTracker />
-        </Route>
+  
+     
   
         <Route path="/my/progressreport" component={ProgressReport}> 
           <ProgressReport />

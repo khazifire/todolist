@@ -16,8 +16,8 @@ IonCard,
 } from '@ionic/react';
 
 import React, { useState } from 'react';
-import { useAuth } from '../../auth';
-import { auth, firestore } from '../../firebase';
+import { useAuth } from '../../firebase/auth';
+import { auth, firestore } from '../../firebase/firebase';
 
 import { Redirect } from 'react-router';
 

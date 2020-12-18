@@ -16,8 +16,8 @@ import {
 } from "@ionic/react";
 
 import React, { useState } from "react";
-import { useAuth } from "../../auth";
-import { auth } from "../../firebase";
+import { useAuth } from "../../firebase/auth";
+import { auth } from "../../firebase/firebase";
 import "../loginAndRegister/StylesSignUP.css";
 import { Redirect } from "react-router";
 
