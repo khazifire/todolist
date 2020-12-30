@@ -4,32 +4,43 @@ import {
   IonButton,
   IonButtons,
   IonCard,
-  IonCardContent,
-  IonCol,
   IonContent,
   IonDatetime,
   IonHeader,
-  IonIcon,
   IonInput,
   IonItem,
   IonItemDivider,
   IonLabel,
-  IonListHeader,
   IonPage,
-  IonRadio,
-  IonRadioGroup,
-  IonRow,
   IonSelect,
   IonSelectOption,
-  IonTextarea,
-  IonTitle,
-  IonToolbar,
+  IonTextarea
 } from "@ionic/react";
 
 
 
 const AddTask: React.FC = () => {
+  const [TaskName, setTaskName]=useState();
+  const [TaskCategory, setTaskCategory]= useState("personal");
+  const [TaskPriority, setTaskPriority]=useState("Urgent");
+  const [StartDate, setStartDate]=useState(Date);
+  const [EndDate, setEndDate]=useState(Date);
+  const [TaskDescription,setTaskDescription]=useState();
+  const [CountTask, setCountTask]=useState(1);
   
+
+  const HandleInputs = ()=>{
+    setTaskName(TaskName);
+    setTaskCategory(TaskCategory);
+    setTaskPriority(TaskPriority);
+    setStartDate(StartDate);
+    setEndDate(EndDate);
+    setTaskDescription(TaskDescription);
+    setCountTask(CountTask+1)
+    console.log(CountTask, "hgh")
+    
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -45,13 +56,14 @@ const AddTask: React.FC = () => {
           </div>
 
           <IonItem>
-            <IonInput type="text" placeholder="Your Task Name"></IonInput>
+            <IonLabel position="stacked">Task Name</IonLabel>
+            <IonInput type="text" value={TaskName} placeholder="what is your task"></IonInput>
           </IonItem>
           <IonItemDivider></IonItemDivider>
           <div>
             <IonItem>
               <IonLabel>Task Category </IonLabel>
-              <IonSelect slot="end">
+              <IonSelect value={TaskCategory}slot="end">
                 <IonSelectOption value="personal">Personal</IonSelectOption>
                 <IonSelectOption value="private">Private</IonSelectOption>
                 <IonSelectOption value="work">Work</IonSelectOption>
@@ -64,7 +76,7 @@ const AddTask: React.FC = () => {
           <div>
             <IonItem>
               <IonLabel>Task Priority </IonLabel>
-              <IonSelect slot="end">
+              <IonSelect value={TaskPriority} slot="end">
                 <IonSelectOption value="VeryUrgent">
                   Very Urgent
                 </IonSelectOption>
@@ -79,7 +91,7 @@ const AddTask: React.FC = () => {
           <IonItem>
             <IonLabel>Start Date</IonLabel>
             <IonDatetime
-              value={"1990-02-19"}
+              value={StartDate}
               placeholder="Select Date"
             ></IonDatetime>{" "}
             {/* should alwassy be curret date */}
@@ -88,7 +100,7 @@ const AddTask: React.FC = () => {
           <IonItem>
             <IonLabel>End Date</IonLabel>
             <IonDatetime
-              value="1990-02-20"
+              value={EndDate}
               placeholder="Select Date"
             ></IonDatetime>{" "}
             {/* should awassy be one day after */}
@@ -96,12 +108,12 @@ const AddTask: React.FC = () => {
 
           <IonItem>
             <IonLabel position="stacked">Description</IonLabel>
-            <IonTextarea></IonTextarea>
+            <IonTextarea value={TaskDescription}></IonTextarea>
           </IonItem>
         
 
           <div className="ion-padding">
-            <IonButton expand="block" type="submit" class="ion-no-margin">
+            <IonButton expand="block" onClick={HandleInputs} class="ion-no-margin">
               Create New Task
             </IonButton>
           </div>
