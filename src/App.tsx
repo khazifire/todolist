@@ -2,7 +2,6 @@ import {
   IonApp,
   IonIcon,
   IonLabel,
-  IonLoading,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -11,12 +10,12 @@ import {
 
 import React from 'react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 
 
 
-import TodoPage from './components/TodoPage';
-import CalenderPage from './components/CalenderPage';
+import DashBoard from './components/DashBoard';
+import AddTask from './components/AddTask';
 import SettingPage from './components/SettingPage';
 import { statsChart, listCircle ,calendar, ellipsisHorizontalCircle } from 'ionicons/icons';
 
@@ -28,25 +27,29 @@ const App: React.FC = () => {
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/home" component={TodoPage} exact={true} />
-          <Route path="/calendar" component={CalenderPage} exact={true} />
+          <Route path="/home" component={DashBoard} exact={true} />
+          <Route path="/AddTask" component={AddTask} exact={true} />
           <Route path="/setting" component={SettingPage} />
           <Route path="/" render={() => <Redirect to="/home" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/home">
             <IonIcon icon={listCircle} />
-            <IonLabel>ToDo List</IonLabel>
+            <IonLabel>DashBoard</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/calendar">
+          <IonTabButton tab="tab2" href="/Task">
             <IonIcon icon={statsChart} />
-            <IonLabel>Status</IonLabel>
+            <IonLabel>Task</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/calendar">
+          <IonTabButton tab="tab3" href="/AddTask">
             <IonIcon icon={calendar} />
-            <IonLabel>Calendar</IonLabel>
+            <IonLabel>Add Task</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/setting">
+          <IonTabButton tab="tab4" href="/setting">
+            <IonIcon icon={ellipsisHorizontalCircle} />
+            <IonLabel>Team</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="tab5" href="/setting">
             <IonIcon icon={ellipsisHorizontalCircle} />
             <IonLabel>Setting</IonLabel>
           </IonTabButton>
